@@ -1,0 +1,37 @@
+/*
+ * 	 author: 	zhouyuhao
+ * 	 created: 	2024-11-02 11:02:11
+ * 	 modified: 	2024-11-02 11:13:07
+ * 	 project: 	LeetCode
+ * 	 venue: 	226, Harbin
+ */
+
+/*
+ * @lc app=leetcode.cn id=141 lang=cpp
+ *
+ * [141] 环形链表
+ */
+
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode* head) {
+        ListNode *slow = head, *fast = head;
+        // slow: turtle; fast: hare
+        while (fast && fast->next) { // loop: at least 2 nodes
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast) return true;
+        }
+        return false;
+    }
+};
+// @lc code=end
