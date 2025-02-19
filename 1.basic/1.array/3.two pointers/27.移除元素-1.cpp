@@ -1,7 +1,7 @@
 /*
  * 	 author: 	zhouyuhao
  * 	 created: 	2025-02-13 09:52:02
- * 	 modified: 	2025-02-16 18:40:35
+ * 	 modified: 	2025-02-19 11:40:13
  * 	 project: 	LeetCode of labuladong
  * 	 venue: 	226, Harbin
  */
@@ -21,6 +21,8 @@ public:
         for (int hi = 0; hi < (int)nums.size(); hi++) {
             if (nums[hi] != val) {
                 nums[lo++] = nums[hi];
+                // just move forward, overwrite, no need to swap
+                // if swap, [lo, hi) must all be equal to val
             }
         }
         return lo;

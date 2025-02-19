@@ -1,7 +1,7 @@
 /*
  * 	 author: 	zhouyuhao
  * 	 created: 	2025-02-13 09:52:02
- * 	 modified: 	2025-02-16 18:53:24
+ * 	 modified: 	2025-02-18 23:19:07
  * 	 project: 	LeetCode of labuladong
  * 	 venue: 	226, Harbin
  */
@@ -21,8 +21,10 @@ public:
         for (int hi = 0; hi < (int)nums.size(); hi++) {
             if (nums[hi] != 0) {
                 swap(nums[lo++], nums[hi]);
-                // swap: unstable for zero
-                // lo++: stable for non-zero
+                // swap: unstable for zero; lo++: stable for non-zero
+                // swap between begins of [lo, hi) and [hi, inf)
+                // after swap, [0, lo) expand by 1, [hi, inf) shrink by 1
+                // [lo, hi) move the first zero to end, as shift right by 1
             }
         }
     }

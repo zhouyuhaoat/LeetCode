@@ -1,7 +1,7 @@
 /*
  * 	 author: 	zhouyuhao
  * 	 created: 	2025-02-13 09:52:02
- * 	 modified: 	2025-02-13 10:03:33
+ * 	 modified: 	2025-02-18 22:23:03
  * 	 project: 	LeetCode of labuladong
  * 	 venue: 	226, Harbin
  */
@@ -25,7 +25,7 @@ public:
             while (lo < hi && !isalnum(s[hi])) {
                 hi--;
             }
-            if (lo < hi && tolower(s[lo++]) != tolower(s[hi--])) {
+            if (tolower(s[lo++]) != tolower(s[hi--])) {
                 return false;
             }
         }
