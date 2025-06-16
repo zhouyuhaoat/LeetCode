@@ -16,15 +16,15 @@
 class Solution {
 public:
     int ship(vector<int>& weights, int cap) {
-        int d = 1, cur = 0;
-        for (int w : weights) {
-            cur += w;
-            if (cur > cap) {
-                d++;
-                cur = w;
+        int day = 1, load = 0;
+        for (int weight : weights) {
+            load += weight;
+            if (load > cap) {
+                day++;
+                load = weight;
             }
         }
-        return d;
+        return day;
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int lo = *ranges::max_element(weights);

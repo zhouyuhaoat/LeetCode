@@ -15,12 +15,12 @@
 // @lc code=start
 class Solution {
 public:
-    int eat(vector<int>& piles, int v) {
-        int h = 0;
-        for (int p : piles) {
-            h += (p + v - 1) / v; // ceil
+    int eat(vector<int>& piles, int speed) {
+        int hour = 0;
+        for (int pile : piles) {
+            hour += (pile + speed - 1) / speed; // ceil
         }
-        return h;
+        return hour;
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int lo = 1, hi = *ranges::max_element(piles) + 1;

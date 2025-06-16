@@ -15,9 +15,9 @@
 // @lc code=start
 class Solution {
 public:
-    int eat(vector<int>& piles, int v) {
-        return transform_reduce(piles.begin(), piles.end(), 0, plus<int>(), [v](int p) {
-            return (p + v - 1) / v;
+    int eat(vector<int>& piles, int speed) {
+        return transform_reduce(piles.begin(), piles.end(), 0, plus<int>(), [speed](int pile) {
+            return (pile + speed - 1) / speed;
         });
     }
     int minEatingSpeed(vector<int>& piles, int h) {
