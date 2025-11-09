@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int upper_bound(vector<vector<int>>& A, int e) {
         int lo = 0, hi = A.size();
         while (lo < hi) {
@@ -27,6 +27,8 @@ public:
         }
         return hi;
     }
+
+public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         int row = upper_bound(matrix, target);
         if (row-- == 0) return false; // valid row

@@ -21,7 +21,7 @@ public:
         });
         if (row-- == matrix.begin()) return false;
         return binary_search(row->begin(), row->end(), target);
-        // vector<vector<int>>::iterator -> vector<int> = [it->begin(), it->end())
+        // vector<vector<int>>::iterator => vector<int> = [it->begin(), it->end())
     }
 };
 // @lc code=end

@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     bool binary_search(vector<vector<int>>& A, int e) {
         int m = A.size(), n = A[0].size();
         int lo = 0, hi = m * n; // 2D matrix -> flatten -> 1D array
@@ -31,6 +31,8 @@ public:
         }
         return false;
     }
+
+public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         return binary_search(matrix, target);
     }

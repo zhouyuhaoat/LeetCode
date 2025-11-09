@@ -14,14 +14,16 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int eat(vector<int>& piles, int speed) {
         return transform_reduce(piles.begin(), piles.end(), 0, plus<int>(), [speed](int pile) {
             return (pile + speed - 1) / speed;
         });
     }
+
+public:
     int minEatingSpeed(vector<int>& piles, int h) {
-        int lo = 1, hi = *ranges::max_element(piles) + 1;
+        int lo = 1, hi = ranges::max(piles) + 1;
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
             if (eat(piles, mi) <= h) {

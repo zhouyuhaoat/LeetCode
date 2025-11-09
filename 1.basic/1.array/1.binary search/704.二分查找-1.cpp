@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int binary_search(vector<int>& A, int e) {
         int lo = 0, hi = A.size(); // [lo, hi)
         while (lo < hi) {
@@ -29,6 +29,8 @@ public:
         }
         return -1;
     }
+
+public:
     int search(vector<int>& nums, int target) {
         return binary_search(nums, target);
     }

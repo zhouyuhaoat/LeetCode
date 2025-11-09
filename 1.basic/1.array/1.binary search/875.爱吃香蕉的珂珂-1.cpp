@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int eat(vector<int>& piles, int speed) {
         int hour = 0;
         for (int pile : piles) {
@@ -22,6 +22,8 @@ public:
         }
         return hour;
     }
+
+public:
     int minEatingSpeed(vector<int>& piles, int h) {
         int lo = 1, hi = *ranges::max_element(piles) + 1;
         while (lo < hi) {

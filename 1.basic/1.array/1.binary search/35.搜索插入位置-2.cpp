@@ -16,7 +16,7 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        int id = distance(nums.begin(), ranges::upper_bound(nums, target));
+        int id = distance(nums.begin(), ranges::upper_bound(nums, target)); // stability
         return id > 0 && nums[id - 1] == target ? id - 1 : id; // valid -> judge
     }
 };

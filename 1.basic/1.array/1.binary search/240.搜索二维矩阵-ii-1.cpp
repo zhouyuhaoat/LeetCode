@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     bool zigzag_search(vector<vector<int>>& A, int e) {
         int m = A.size(), n = A[0].size();
         int i = 0, j = n - 1; // top-right corner
@@ -29,6 +29,8 @@ public:
         }
         return false;
     }
+
+public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         return zigzag_search(matrix, target);
     }

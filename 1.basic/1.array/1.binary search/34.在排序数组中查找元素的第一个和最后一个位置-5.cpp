@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int upper_bound(vector<int>& A, int e) {
         int lo = 0, hi = A.size();
         while (lo < hi) {
@@ -27,6 +27,8 @@ public:
         }
         return hi;
     }
+
+public:
     vector<int> searchRange(vector<int>& nums, int target) {
         int first = upper_bound(nums, target - 1);
         int last = upper_bound(nums, target) - 1;
