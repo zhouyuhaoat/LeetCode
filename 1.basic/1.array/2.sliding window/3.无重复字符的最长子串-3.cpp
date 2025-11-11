@@ -17,8 +17,8 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         int res = 0;
-        unordered_map<char, bool> win;
-        for (int lo = 0, hi = 0; hi < (int)s.size(); lo++) { // [lo, hi)
+        unordered_map<char, bool> win; // set -> map
+        for (int lo = 0, hi = 0; hi < (int)s.size(); lo++) {
             while (hi < (int)s.size() && win[s[hi]] == false) {
                 win[s[hi++]] = true;
             }

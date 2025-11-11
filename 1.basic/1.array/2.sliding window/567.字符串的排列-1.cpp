@@ -16,18 +16,18 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int> cnt1(26), cnt2(26);
+        vector<int> cnt1(128), cnt2(128);
         for (char ch : s1) {
-            cnt1[ch - 'a']++;
+            cnt1[ch]++;
         }
         for (int hi = 0; hi < (int)s2.size(); hi++) {
-            cnt2[s2[hi] - 'a']++;
+            cnt2[s2[hi]]++;
             int lo = hi - s1.size() + 1;
             if (lo >= 0) {
                 if (cnt1 == cnt2) {
                     return true;
                 }
-                cnt2[s2[lo] - 'a']--;
+                cnt2[s2[lo]]--;
             }
         }
         return false;

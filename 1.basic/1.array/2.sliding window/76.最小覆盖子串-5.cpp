@@ -16,15 +16,19 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        // two count -> counteract each other -> one count
-        vector<int> cnt(128); // have, need => need - have <=> (-have) + (+need)
+        /*
+            two count -> counteract each other -> one count
+            have, need => need - have <=> (-have) + (+need)
+            cover a char: have < need => need - have > 0
+         */
+        vector<int> cnt(128);
         for (char ch : t) {
             cnt[ch]++;
         }
         int res = -1, len = INT_MAX, cover = 0;
-        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) { // [lo, hi)
+        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) {
             while (hi < (int)s.size() && cover < (int)t.size()) {
-                if (cnt[s[hi]]-- > 0) { // have < need before in
+                if (cnt[s[hi]]-- > 0) { // before in
                     cover++;
                 }
                 hi++;
@@ -33,7 +37,7 @@ public:
                 len = hi - lo;
                 res = lo;
             }
-            if (++cnt[s[lo]] > 0) { // have < need after out
+            if (++cnt[s[lo]] > 0) { // after out
                 cover--;
             }
         }

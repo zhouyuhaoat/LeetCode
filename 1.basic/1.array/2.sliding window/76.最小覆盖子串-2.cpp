@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     unordered_map<char, int> win, tar;
     bool cover() {
         for (auto it : tar) {
@@ -24,6 +24,8 @@ public:
         }
         return true;
     }
+
+public:
     string minWindow(string s, string t) {
         for (char ch : t) {
             tar[ch]++;

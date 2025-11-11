@@ -16,24 +16,24 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        vector<int> res, cnt(26);
+        vector<int> res, cnt(128);
         for (char ch : p) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
         int diff = cnt.size() - ranges::count(cnt, 0);
-        auto update = [&](int ch, int add) {
+        auto update = [&](char ch, int add) {
             if (cnt[ch] == 0) diff++; // same before update -> different after update
             cnt[ch] += add;
             if (cnt[ch] == 0) diff--; // same after update
         };
         for (int hi = 0; hi < (int)s.size(); hi++) {
-            update(s[hi] - 'a', -1);
+            update(s[hi], -1);
             int lo = hi - (int)p.size() + 1;
             if (lo >= 0) {
                 if (diff == 0) {
                     res.emplace_back(lo);
                 }
-                update(s[lo] - 'a', 1);
+                update(s[lo], 1);
             }
         }
         return res;

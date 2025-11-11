@@ -22,11 +22,11 @@ public:
         }
         int res = -1, len = INT_MAX, cover = 0;
         auto update = [&](char ch, int add) {
-            if (add == -1 && cnt[ch] > 0) cover++;
+            if (cnt[ch] > 0 && add == -1) cover++;
             cnt[ch] += add;
-            if (add == 1 && cnt[ch] > 0) cover--;
+            if (cnt[ch] > 0 && add == 1) cover--;
         };
-        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) { // [lo, hi]
+        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) {
             update(s[hi], -1);
             while (cover == (int)t.size()) {
                 if (hi - lo + 1 < len) {

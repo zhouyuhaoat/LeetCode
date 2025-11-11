@@ -18,8 +18,10 @@ public:
     int lengthOfLongestSubstring(string s) {
         int res = 0;
         vector<int> prev(128, -1);
-        // repeat => previous char inside/after the substring
-        // prev: previous index of the char; -1: never appear
+        /*
+            repeat => previous char inside or after the substring
+            prev: previous index of the char; -1: never appear
+         */
         for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) { // [lo, hi]
             if (prev[s[hi]] >= lo) {
                 lo = prev[s[hi]] + 1; // lo: the start of the substring

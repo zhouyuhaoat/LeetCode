@@ -16,15 +16,15 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int> cnt(26);
+        vector<int> cnt(128);
         for (char ch : s1) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
         int diff = ranges::count_if(cnt, [](int val) {
             return val != 0;
         });
         for (int hi = 0; hi < (int)s2.size(); hi++) {
-            int& right = cnt[s2[hi] - 'a'];
+            int& right = cnt[s2[hi]];
             if (right == 1) {
                 diff--;
             } else if (right == 0) {
@@ -34,7 +34,7 @@ public:
             int lo = hi - s1.size() + 1;
             if (lo >= 0) {
                 if (diff == 0) return true;
-                int& left = cnt[s2[lo] - 'a'];
+                int& left = cnt[s2[lo]];
                 if (left == -1) {
                     diff--;
                 } else if (left == 0) {

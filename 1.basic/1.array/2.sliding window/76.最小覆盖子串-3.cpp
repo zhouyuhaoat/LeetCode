@@ -25,8 +25,8 @@ public:
             cover: monitor the number of covered chars
             cover a char: have < need, before in, after out
             cover: have >= need for all => cover == size
-        */
-        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) { // [lo, hi)
+         */
+        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) {
             while (hi < (int)s.size() && cover < (int)t.size()) {
                 if (win[s[hi]]++ < tar[s[hi]]) { // have < need before in
                     cover++;

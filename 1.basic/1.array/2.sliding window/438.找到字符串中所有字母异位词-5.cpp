@@ -20,15 +20,15 @@ public:
             anagram: have = need; cover: have >= need
             anagram is a special case of cover, cover is a general case of anagram
             cover + same length => cover each char a time => just right => anagrams
-        */
-        vector<int> res, cnt(26);
+         */
+        vector<int> res, cnt(128);
         for (char ch : p) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
         int cover = 0;
         for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) { // [lo, hi)
             while (hi < (int)s.size() && cover < (int)p.size()) {
-                if (cnt[s[hi] - 'a']-- > 0) {
+                if (cnt[s[hi]]-- > 0) {
                     cover++;
                 }
                 hi++;
@@ -36,7 +36,7 @@ public:
             if (cover == (int)p.size() && hi - lo == (int)p.size()) {
                 res.emplace_back(lo);
             }
-            if (++cnt[s[lo] - 'a'] > 0) {
+            if (++cnt[s[lo]] > 0) {
                 cover--;
             }
         }

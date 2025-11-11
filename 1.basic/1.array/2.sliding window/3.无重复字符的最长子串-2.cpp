@@ -23,7 +23,7 @@ public:
                 win.erase(s[lo++]);
             }
             res = max(res, hi - lo + 1);
-            win.emplace(s[hi]);
+            win.emplace(s[hi]); // defer
         }
         return res;
     }

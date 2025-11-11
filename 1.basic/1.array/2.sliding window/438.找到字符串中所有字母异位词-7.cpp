@@ -16,20 +16,20 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        vector<int> res, cnt(26);
+        vector<int> res, cnt(128);
         for (char ch : p) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
-        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) { // [lo, hi)
-            while (hi < (int)s.size() && cnt[s[hi] - 'a'] > 0) { // not enough: have < need
-                cnt[s[hi] - 'a']--;
+        for (int lo = 0, hi = 0; lo < (int)s.size(); lo++) {
+            while (hi < (int)s.size() && cnt[s[hi]] > 0) { // not enough: have < need
+                cnt[s[hi]]--;
                 hi++;
             }
             // enough: have >= need
             if (hi - lo == (int)p.size()) { // just right: have == need
                 res.emplace_back(lo);
             }
-            cnt[s[lo] - 'a']++;
+            cnt[s[lo]]++;
         }
         return res;
     }

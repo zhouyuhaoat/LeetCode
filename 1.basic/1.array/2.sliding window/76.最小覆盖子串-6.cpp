@@ -21,7 +21,7 @@ public:
             cnt[ch]++;
         }
         int res = -1, len = INT_MAX, cover = 0;
-        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) { // [lo, hi]
+        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) {
             if (cnt[s[hi]]-- > 0) {
                 cover++;
             }

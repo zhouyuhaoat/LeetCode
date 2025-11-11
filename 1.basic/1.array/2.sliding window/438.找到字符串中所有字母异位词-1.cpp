@@ -16,18 +16,18 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        vector<int> res, cntS(26), cntP(26); // have, need
+        vector<int> res, cntS(128), cntP(128); // have, need
         for (char ch : p) {
-            cntP[ch - 'a']++;
+            cntP[ch]++;
         }
         for (int hi = 0; hi < (int)s.size(); hi++) {
-            cntS[s[hi] - 'a']++;
+            cntS[s[hi]]++;
             int lo = hi - p.size() + 1; // lo: the start of the substring
             if (lo >= 0) { // prerequisite: same length
                 if (cntP == cntS) { // anagram: have = need
                     res.emplace_back(lo);
                 }
-                cntS[s[lo] - 'a']--;
+                cntS[s[lo]]--; // fixed-length
             }
         }
         return res;

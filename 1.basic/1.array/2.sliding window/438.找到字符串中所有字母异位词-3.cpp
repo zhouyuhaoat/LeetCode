@@ -16,16 +16,19 @@
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
-        // two count -> counteract each other -> one count
-        vector<int> res, cnt(26); // have, need => need - have <=> (-have) + (+need)
+        /*
+            two count -> counteract each other -> one count
+            have, need => need - have <=> (-have) + (+need)
+         */
+        vector<int> res, cnt(128);
         for (char ch : p) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
         int diff = ranges::count_if(cnt, [](int val) {
             return val != 0; // non-same -> non-zero
         });
         for (int hi = 0; hi < (int)s.size(); hi++) {
-            int& right = cnt[s[hi] - 'a'];
+            int& right = cnt[s[hi]];
             if (right == 1) { // non-zero -> zero
                 diff--;
             } else if (right == 0) { // zero -> non-zero
@@ -37,7 +40,7 @@ public:
                 if (diff == 0) {
                     res.emplace_back(lo);
                 }
-                int& left = cnt[s[lo] - 'a'];
+                int& left = cnt[s[lo]];
                 if (left == -1) { // non-zero -> zero
                     diff--;
                 } else if (left == 0) { // zero -> non-zero

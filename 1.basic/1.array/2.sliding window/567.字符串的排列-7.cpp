@@ -16,17 +16,17 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int> cnt(26);
+        vector<int> cnt(128);
         for (char ch : s1) {
-            cnt[ch - 'a']++;
+            cnt[ch]++;
         }
         for (int lo = 0, hi = 0; lo < (int)s2.size(); lo++) {
-            while (hi < (int)s2.size() && cnt[s2[hi] - 'a'] > 0) {
-                cnt[s2[hi] - 'a']--;
+            while (hi < (int)s2.size() && cnt[s2[hi]] > 0) {
+                cnt[s2[hi]]--;
                 hi++;
             }
             if (hi - lo == (int)s1.size()) return true;
-            cnt[s2[lo] - 'a']++;
+            cnt[s2[lo]]++;
         }
         return false;
     }
