@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-13 10:07:16
- *   modified:  2025-06-21 22:08:11
+ *   modified:  2025-06-21 22:12:51
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
@@ -16,24 +16,15 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int res = 0;
-        stack<int> stk; // (descending) monotonic stack
-        for (int i = 0; i < (int)height.size(); i++) {
-            while (!stk.empty() && height[i] > height[stk.top()]) {
-                /*
-                    concave area
-                    1. left: second top
-                    2. lowest: first top
-                    3. right: current
-                */
-                int low = stk.top();
-                stk.pop();
-                if (stk.empty()) break;
-                int left = stk.top(), right = i;
-                int h = min(height[left], height[right]) - height[low], w = right - left - 1;
-                res += h * w; // row by row
+        int res = 0, left = 0, right = 0; // boundaries on the fly
+        for (int lo = 0, hi = height.size() - 1; lo < hi;) {
+            left = max(left, height[lo]), right = max(right, height[hi]);
+            // greedy: move the lower one
+            if (left < right) {
+                res += left - height[lo++];
+            } else {
+                res += right - height[hi--];
             }
-            stk.emplace(i);
         }
         return res;
     }

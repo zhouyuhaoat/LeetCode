@@ -17,16 +17,16 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         int n = height.size();
-        vector<int> lo(n), hi(n); // max height to the left and right
+        vector<int> left(n), right(n); // boundaries: max height to the left and right
         for (int i = 1; i < n; i++) {
-            lo[i] = max(lo[i - 1], height[i - 1]);
+            left[i] = max(left[i - 1], height[i - 1]);
         }
         for (int i = n - 2; i >= 0; i--) {
-            hi[i] = max(hi[i + 1], height[i + 1]);
+            right[i] = max(right[i + 1], height[i + 1]);
         }
         int res = 0;
         for (int i = 0; i < n; i++) {
-            int col = min(lo[i], hi[i]) - height[i]; // column by column
+            int col = min(left[i], right[i]) - height[i]; // column by column
             res += col > 0 ? col : 0;
         }
         return res;

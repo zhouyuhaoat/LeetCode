@@ -23,14 +23,7 @@ public:
             if (start <= end) { // valid interval
                 res.emplace_back(vector<int>{start, end});
             }
-            firstList[lo][1] < secondList[hi][1] ? lo++ : hi++;
-            /*
-                greedy: earliest end time
-                - move the interval with earlier end-point, not start-point
-                - since the interval with later end-point may intersect with the other interval
-                - since the interval with earlier end-point must not intersect with the other interval any more
-                - if the end-point is the same, move both
-            */
+            firstList[lo][1] < secondList[hi][1] ? lo++ : hi++; // greedy: earlier end time
         }
         return res;
     }

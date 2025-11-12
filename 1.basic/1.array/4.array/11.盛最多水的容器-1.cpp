@@ -21,12 +21,9 @@ public:
             res = max(res, min(height[lo], height[hi]) * (hi - lo));
             /*
                 greedy
-                - move bottleneck -> minimum loss -> maximum gain
-                    - lower = min(lo, hi): bottleneck, can not compose a larger area with the other
-                    - higher = max(lo, hi): possibly compose a larger area with the other side
-                - move the lower one, the area may be larger
+                - move the lower one (bottleneck), the area may be larger
                 - if move higher, the area must be smaller, so move lower
-            */
+             */
             height[lo] < height[hi] ? lo++ : hi--;
         }
         return res;
