@@ -1,9 +1,9 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-13 09:52:02
- *   modified:  2025-06-19 15:43:05
+ *   created:   2025-02-13 11:47:14
+ *   modified:  2025-06-19 15:43:39
  *   project:   LeetCode of labuladong
- *   venue:     226, Harbin
+ *   venue:     914, Harbin
  */
 
 /*
@@ -17,16 +17,16 @@ class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
         int mi = distance(nums.begin(), ranges::lower_bound(nums, 0)); // divine line
-        int lo = mi - 1, hi = mi;
-        // [0, lo + 1) = [0, lo]: negative; [lo + 1, hi): empty; [hi, inf): 0 + positive
+        int lo = mi, hi = mi;
+        // [0, lo): negative; [lo, hi): empty; [hi, size): 0 + positive
         vector<int> res;
-        while (lo >= 0 || hi < (int)nums.size()) { // 2-way merge
-            if (lo < 0) {
+        while (lo > 0 || hi < (int)nums.size()) { // 2-way merge
+            if (lo <= 0) { // base case 1
                 res.emplace_back(nums[hi] * nums[hi++]);
-            } else if (hi >= (int)nums.size()) {
-                res.emplace_back(nums[lo] * nums[lo--]);
+            } else if (hi >= (int)nums.size()) { // base case 2
+                res.emplace_back(nums[--lo] * nums[lo]);
             } else {
-                int power1 = nums[lo] * nums[lo], power2 = nums[hi] * nums[hi];
+                int power1 = nums[lo - 1] * nums[lo - 1], power2 = nums[hi] * nums[hi];
                 if (power1 < power2) {
                     res.emplace_back(power1);
                     lo--;

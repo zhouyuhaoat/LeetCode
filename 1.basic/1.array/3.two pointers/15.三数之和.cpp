@@ -18,26 +18,20 @@ public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         vector<vector<int>> res;
         int target = 0, n = nums.size();
-
         ranges::sort(nums); // prerequisite
-
         for (int i = 0; i < n - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) continue; // duplicate
-
             if (nums[i] + nums[i + 1] + nums[i + 2] > target) break; // pruning
             if (nums[i] + nums[n - 1] + nums[n - 2] < target) continue; // pruning
-
-            int lo = i + 1, hi = n - 1; // three sum -> fix -> two sum
+            int lo = i + 1, hi = n - 1; // three sum -> fixed anchor -> two sum
             while (lo < hi) {
                 int sum = nums[i] + nums[lo] + nums[hi];
-
                 if (sum < target) {
                     lo++;
                 } else if (sum > target) {
                     hi--;
                 } else {
                     res.emplace_back(vector<int>{nums[i], nums[lo], nums[hi]});
-
                     do {
                         lo++;
                     } while (lo < hi && nums[lo] == nums[lo - 1]); // duplicate
@@ -47,7 +41,6 @@ public:
                 }
             }
         }
-
         return res;
     }
 };

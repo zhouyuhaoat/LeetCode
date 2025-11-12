@@ -17,42 +17,33 @@ class Solution {
 public:
     int threeSumClosest(vector<int>& nums, int target) {
         int res = -1, diff = INT_MAX, n = nums.size();
-
         ranges::sort(nums);
-
         auto update = [&](int x) {
             if (abs(x - target) < diff) {
                 diff = abs(x - target);
                 res = x; // res != diff + target
             }
         };
-
         for (int i = 0; i < n - 2; i++) {
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-
             int sum = nums[i] + nums[i + 1] + nums[i + 2];
             if (sum > target) {
-                update(sum);
+                update(sum); // update even pruning
                 break;
             }
-
             sum = nums[i] + nums[n - 1] + nums[n - 2];
             if (sum < target) {
-                update(sum);
+                update(sum); // update even pruning
                 continue;
             }
-
             int lo = i + 1, hi = n - 1;
             while (lo < hi) {
                 sum = nums[i] + nums[lo] + nums[hi];
-
                 if (sum == target) return target;
                 sum < target ? lo++ : hi--;
-
                 update(sum);
             }
         }
-
         return res;
     }
 };

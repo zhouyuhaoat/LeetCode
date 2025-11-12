@@ -1,9 +1,9 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-13 11:47:14
- *   modified:  2025-06-19 15:43:39
+ *   created:   2025-02-13 09:52:02
+ *   modified:  2025-06-19 15:44:31
  *   project:   LeetCode of labuladong
- *   venue:     914, Harbin
+ *   venue:     226, Harbin
  */
 
 /*
@@ -16,24 +16,15 @@
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        int mi = distance(nums.begin(), ranges::lower_bound(nums, 0));
-        int lo = mi, hi = mi;
-        // [0, lo): negative; [lo, hi): empty; [hi, inf): 0 + positive
-        vector<int> res;
-        while (lo > 0 || hi < (int)nums.size()) {
-            if (lo <= 0) {
-                res.emplace_back(nums[hi] * nums[hi++]);
-            } else if (hi >= (int)nums.size()) {
-                res.emplace_back(nums[--lo] * nums[lo]);
+        vector<int> res(nums.size());
+        for (int lo = 0, hi = nums.size() - 1, pos = hi; lo <= hi; pos--) { // reverse merge
+            int power1 = nums[lo] * nums[lo], power2 = nums[hi] * nums[hi];
+            if (power1 < power2) {
+                res[pos] = power2;
+                hi--;
             } else {
-                int power1 = nums[lo - 1] * nums[lo - 1], power2 = nums[hi] * nums[hi];
-                if (power1 < power2) {
-                    res.emplace_back(power1);
-                    lo--;
-                } else {
-                    res.emplace_back(power2);
-                    hi++;
-                }
+                res[pos] = power1;
+                lo++;
             }
         }
         return res;

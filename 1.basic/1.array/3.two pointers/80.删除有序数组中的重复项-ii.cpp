@@ -18,7 +18,7 @@ public:
     int removeDuplicates(vector<int>& nums) {
         int k = 2, lo = k;
         if ((int)nums.size() <= k) return nums.size();
-        // [0, lo): at most k; [lo, hi): more than k; [hi, inf): unknown
+        // [0, lo): at most k; [lo, hi): more than k; [hi, size): unknown
         for (int hi = k; hi < (int)nums.size(); hi++) {
             if (nums[hi] != nums[lo - k]) {
                 nums[lo++] = nums[hi];

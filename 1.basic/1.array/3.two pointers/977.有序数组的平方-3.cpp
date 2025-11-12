@@ -1,9 +1,9 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-13 09:52:02
- *   modified:  2025-06-19 15:44:31
+ *   created:   2025-02-18 17:56:04
+ *   modified:  2025-06-19 16:09:53
  *   project:   LeetCode of labuladong
- *   venue:     226, Harbin
+ *   venue:     914, Harbin
  */
 
 /*
@@ -17,14 +17,18 @@ class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
         vector<int> res(nums.size());
-        for (int lo = 0, hi = nums.size() - 1, pos = hi; lo <= hi; pos--) { // reverse merge
-            int power1 = nums[lo] * nums[lo], power2 = nums[hi] * nums[hi];
-            if (power1 < power2) {
-                res[pos] = power2;
-                hi--;
-            } else {
-                res[pos] = power1;
+        for (int lo = 0, hi = nums.size() - 1, pos = hi; lo <= hi; pos--) {
+            /*
+                multiply
+                1. twice: compare square values directly
+                2. once: compare additive inverse of smaller and original value of larger indirectly since sorted
+             */
+            if (-nums[lo] > nums[hi]) {
+                res[pos] = nums[lo] * nums[lo];
                 lo++;
+            } else {
+                res[pos] = nums[hi] * nums[hi];
+                hi--;
             }
         }
         return res;

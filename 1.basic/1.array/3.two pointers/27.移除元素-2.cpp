@@ -16,8 +16,8 @@
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int hi = nums.size();
-        // [0, lo): != val; [lo, hi): unknown; [hi, inf): == val
+        int hi = nums.size(); // reverse remove
+        // [0, lo): != val; [lo, hi): unknown; [hi, size): == val
         for (int lo = 0; lo < hi; lo++) {
             if (nums[lo] == val) {
                 nums[lo--] = nums[--hi];
