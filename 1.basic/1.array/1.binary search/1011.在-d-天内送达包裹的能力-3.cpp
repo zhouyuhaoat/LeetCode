@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-11 22:21:57
- *   modified:  2025-05-22 13:50:29
+ *   modified:  2025-11-14 11:48:40
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
@@ -16,7 +16,7 @@
 class Solution {
 private:
     int ship(vector<int>& weights, int cap) {
-        int day = 1, load = 0;
+        int day = 1, load = 0; // last day
         for (int weight : weights) {
             load += weight;
             if (load > cap) {

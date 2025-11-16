@@ -17,7 +17,7 @@ class Solution {
 private:
     bool binary_search(vector<vector<int>>& A, int e) {
         int m = A.size(), n = A[0].size();
-        int lo = 0, hi = m * n; // 2D matrix -> flatten -> 1D array
+        int lo = 0, hi = m * n; // 2D -> flatten -> 1D
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
             int val = A[mi / n][mi % n];

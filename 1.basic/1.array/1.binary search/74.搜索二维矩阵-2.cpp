@@ -19,7 +19,7 @@ private:
         int lo = 0, hi = A.size();
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
-            if (A[mi][0] > e) { // first element of row
+            if (A[mi][0] > e) { // first element
                 hi = mi;
             } else {
                 lo = mi + 1;

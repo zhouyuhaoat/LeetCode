@@ -30,7 +30,7 @@ private:
 
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        int first = upper_bound(nums, target - 1);
+        int first = upper_bound(nums, target - 1); // upper - epsilon = lower
         int last = upper_bound(nums, target) - 1;
         return first <= last ? vector<int>{first, last} : vector<int>{-1, -1};
     }

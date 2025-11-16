@@ -21,7 +21,6 @@ public:
         });
         if (row-- == matrix.begin()) return false;
         return ranges::binary_search(*row, target); // dereference
-        // vector<vector<int>>::iterator => vector<int> = *it
     }
 };
 // @lc code=end

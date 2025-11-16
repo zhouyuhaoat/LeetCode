@@ -16,8 +16,8 @@
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-        int id = distance(nums.begin(), lower_bound(nums.begin(), nums.end() - 1, target)); // bound the index
-        return nums[id] == target ? id : -1; // in the range
+        int id = distance(nums.begin(), lower_bound(nums.begin(), nums.end() - 1, target));
+        return nums[id] == target ? id : -1; // bound the index in the range
     }
 };
 // @lc code=end

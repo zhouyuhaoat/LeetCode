@@ -17,7 +17,7 @@ class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         auto row = lower_bound(matrix.begin(), matrix.end(), target, [](vector<int>& vec, int val) { // first !< val
-            return vec[0] <= val; // !(vec[0] <= val) => val < vec[0]
+            return vec[0] <= val; // first false
         });
         if (row-- == matrix.begin()) return false;
         return binary_search(row->begin(), row->end(), target);
