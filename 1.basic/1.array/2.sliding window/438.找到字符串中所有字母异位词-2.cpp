@@ -22,7 +22,7 @@ public:
         }
         /*
             diff: count difference between strings
-            anagram: have = need => diff = 0
+            - anagram: have = need => diff = 0
          */
         int diff = ranges::count_if(cntP, [&cntP, &cntS, i = 0](int val) mutable {
             return cntP[i] != cntS[i++];

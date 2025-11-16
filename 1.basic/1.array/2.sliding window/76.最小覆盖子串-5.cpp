@@ -18,8 +18,8 @@ public:
     string minWindow(string s, string t) {
         /*
             two count -> counteract each other -> one count
-            have, need => need - have <=> (-have) + (+need)
-            cover a char: have < need => need - have > 0
+            - have, need => need - have <=> (-have) + (+need)
+            - cover a char: have < need => need - have > 0
          */
         vector<int> cnt(128);
         for (char ch : t) {

@@ -22,7 +22,7 @@ public:
         }
         for (int hi = 0; hi < (int)s.size(); hi++) {
             cntS[s[hi]]++;
-            int lo = hi - p.size() + 1; // lo: the start of the substring
+            int lo = hi - p.size() + 1;
             if (lo >= 0) { // prerequisite: same length
                 if (cntP == cntS) { // anagram: have = need
                     res.emplace_back(lo);

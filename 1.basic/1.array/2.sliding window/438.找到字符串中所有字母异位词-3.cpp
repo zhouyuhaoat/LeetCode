@@ -18,14 +18,14 @@ public:
     vector<int> findAnagrams(string s, string p) {
         /*
             two count -> counteract each other -> one count
-            have, need => need - have <=> (-have) + (+need)
+            - have, need => need - have <=> (-have) + (+need)
          */
         vector<int> res, cnt(128);
         for (char ch : p) {
             cnt[ch]++;
         }
         int diff = ranges::count_if(cnt, [](int val) {
-            return val != 0; // non-same -> non-zero
+            return val != 0; // non-same => non-zero
         });
         for (int hi = 0; hi < (int)s.size(); hi++) {
             int& right = cnt[s[hi]];

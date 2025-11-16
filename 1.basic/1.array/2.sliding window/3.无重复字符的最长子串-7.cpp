@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-13 11:47:14
- *   modified:  2025-11-14 12:17:02
+ *   created:   2025-02-12 23:01:03
+ *   modified:  2025-05-22 18:50:06
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -17,14 +17,13 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         int res = 0;
-        unordered_map<char, int> win;
-        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) {
-            win[s[hi]]++; // no defer
-            while (win[s[hi]] > 1) {
-                win[s[lo]]--;
-                lo++;
+        vector<int> prev(128, -1); // repeat: previous char inside the substring
+        for (int lo = 0, hi = 0; hi < (int)s.size(); hi++) { // [lo, hi]
+            if (prev[s[hi]] >= lo) {
+                lo = prev[s[hi]] + 1;
             }
             res = max(res, hi - lo + 1);
+            prev[s[hi]] = hi;
         }
         return res;
     }

@@ -18,8 +18,8 @@ public:
     vector<int> findAnagrams(string s, string p) {
         /*
             anagram: have = need; cover: have >= need
-            anagram is a special case of cover, cover is a general case of anagram
-            cover + same length => cover each char a time => just right => anagrams
+            - anagram is a special case of cover, cover is a general case of anagram
+            - cover + same length => cover each char a time => just right => anagrams
          */
         vector<int> res, cnt(128);
         for (char ch : p) {
