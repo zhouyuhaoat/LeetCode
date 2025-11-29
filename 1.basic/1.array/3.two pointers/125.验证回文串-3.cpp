@@ -16,11 +16,11 @@
 class Solution {
 public:
     bool isPalindrome(string s) {
-        for (int lo = 0, hi = s.size() - 1; lo < hi;) {
+        for (int lo = 0, hi = s.size() - 1; lo < hi; lo++, hi--) {
+            // filter non-alphanumeric characters
             while (lo < hi && !isalnum(s[lo])) lo++;
             while (lo < hi && !isalnum(s[hi])) hi--;
-            // after while, s[lo] and s[hi] are alphanumeric or lo >= hi
-            if (tolower(s[lo++]) != tolower(s[hi--])) {
+            if (tolower(s[lo]) != tolower(s[hi])) {
                 return false;
             }
         }

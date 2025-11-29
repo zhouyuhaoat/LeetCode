@@ -1,9 +1,9 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-13 09:52:02
- *   modified:  2025-06-19 14:06:12
+ *   created:   2025-11-14 23:15:54
+ *   modified:  2025-11-14 23:24:04
  *   project:   LeetCode of labuladong
- *   venue:     226, Harbin
+ *   venue:     914, Harbin
  */
 
 /*
@@ -17,14 +17,12 @@ class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
         int k = 2, lo = k;
-        if ((int)nums.size() <= k) return nums.size();
-        // [0, lo): at most k; [lo, hi): more than k; [hi, size): unknown
-        for (int hi = k; hi < (int)nums.size(); hi++) {
+        for (int hi = lo; hi < (int)nums.size(); hi++) {
             if (nums[hi] != nums[lo - k]) {
                 nums[lo++] = nums[hi];
             }
         }
-        return lo;
+        return min(lo, (int)nums.size());
     }
 };
 // @lc code=end

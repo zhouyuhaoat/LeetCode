@@ -18,7 +18,7 @@ public:
     void moveZeroes(vector<int>& nums) {
         int lo = 0, val = 0;
         // [0, lo): != 0; [lo, hi): == 0; [hi, size): unknown
-        for (int hi = 0; hi < (int)nums.size(); hi++) {
+        for (int hi = lo; hi < (int)nums.size(); hi++) {
             if (nums[hi] != val) {
                 swap(nums[lo++], nums[hi]);
             }

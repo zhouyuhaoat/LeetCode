@@ -39,8 +39,17 @@ public:
             int lo = i + 1, hi = n - 1;
             while (lo < hi) {
                 sum = nums[i] + nums[lo] + nums[hi];
-                if (sum == target) return target;
-                sum < target ? lo++ : hi--;
+                if (sum > target) {
+                    do {
+                        hi--;
+                    } while (lo < hi && nums[hi] == nums[hi + 1]);
+                } else if (sum < target) {
+                    do {
+                        lo++;
+                    } while (lo < hi && nums[lo] == nums[lo - 1]);
+                } else {
+                    return target;
+                }
                 update(sum);
             }
         }

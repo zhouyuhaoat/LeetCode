@@ -18,12 +18,7 @@ public:
     vector<int> sortedSquares(vector<int>& nums) {
         vector<int> res(nums.size());
         for (int lo = 0, hi = nums.size() - 1, pos = hi; lo <= hi; pos--) {
-            /*
-                multiply
-                1. twice: compare square values directly
-                2. once: compare additive inverse of smaller and original value of larger indirectly since sorted
-             */
-            if (-nums[lo] > nums[hi]) {
+            if (-nums[lo] > nums[hi]) { // additive inverse
                 res[pos] = nums[lo] * nums[lo];
                 lo++;
             } else {

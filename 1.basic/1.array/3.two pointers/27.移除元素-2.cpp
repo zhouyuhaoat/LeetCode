@@ -16,14 +16,14 @@
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        int hi = nums.size(); // reverse remove
+        int lo = 0;
         // [0, lo): != val; [lo, hi): unknown; [hi, size): == val
-        for (int lo = 0; lo < hi; lo++) {
+        for (int hi = nums.size(); lo < hi; lo++) { // reverse remove
             if (nums[lo] == val) {
                 nums[lo--] = nums[--hi];
             }
         }
-        return hi;
+        return lo;
     }
 };
 // @lc code=end

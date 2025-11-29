@@ -19,12 +19,12 @@ public:
         vector<int> res(nums.size());
         for (int lo = 0, hi = nums.size() - 1, pos = hi; lo <= hi; pos--) { // reverse merge
             int power1 = nums[lo] * nums[lo], power2 = nums[hi] * nums[hi];
-            if (power1 < power2) {
-                res[pos] = power2;
-                hi--;
-            } else {
+            if (power1 > power2) {
                 res[pos] = power1;
                 lo++;
+            } else {
+                res[pos] = power2;
+                hi--;
             }
         }
         return res;

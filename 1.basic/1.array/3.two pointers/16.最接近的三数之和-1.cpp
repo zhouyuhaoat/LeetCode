@@ -24,12 +24,16 @@ public:
             }
         };
         for (int i = 0; i < n - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
             int lo = i + 1, hi = n - 1;
             while (lo < hi) {
                 int sum = nums[i] + nums[lo] + nums[hi];
-                if (sum == target) return target;
-                sum < target ? lo++ : hi--;
+                if (sum > target) {
+                    hi--;
+                } else if (sum < target) {
+                    lo++;
+                } else {
+                    return target;
+                }
                 update(sum);
             }
         }

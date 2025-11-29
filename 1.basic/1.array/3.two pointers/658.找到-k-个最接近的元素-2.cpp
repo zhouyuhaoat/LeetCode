@@ -24,7 +24,7 @@ public:
                 hi++;
             } else if (hi >= (int)arr.size()) { // base case 2
                 lo--;
-            } else if (x - arr[lo - 1] <= arr[hi] - x) { // if equal, lo - 1 < hi
+            } else if (x - arr[lo - 1] <= arr[hi] - x) { // if equal, prefer smaller
                 lo--;
             } else {
                 hi++;

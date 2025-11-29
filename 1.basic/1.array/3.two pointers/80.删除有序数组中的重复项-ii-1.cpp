@@ -1,23 +1,24 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-13 09:52:02
- *   modified:  2025-06-19 14:05:38
+ *   modified:  2025-06-19 14:06:12
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
 
 /*
- * @lc app=leetcode.cn id=26 lang=cpp
+ * @lc app=leetcode.cn id=80 lang=cpp
  *
- * [26] 删除有序数组中的重复项
+ * [80] 删除有序数组中的重复项 II
  */
 
 // @lc code=start
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        int k = 1, lo = k;
-        // [0, lo): unique; [lo, hi): duplicate; [hi, size): unknown
+        int k = 2, lo = k;
+        if (lo >= (int)nums.size()) return nums.size(); // keep all if over size
+        // [0, lo): at most k; [lo, hi): more than k; [hi, size): unknown
         for (int hi = lo; hi < (int)nums.size(); hi++) {
             if (nums[hi] != nums[lo - k]) {
                 nums[lo++] = nums[hi];

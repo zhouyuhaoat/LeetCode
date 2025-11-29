@@ -26,18 +26,18 @@ public:
             int lo = i + 1, hi = n - 1; // three sum -> fixed anchor -> two sum
             while (lo < hi) {
                 int sum = nums[i] + nums[lo] + nums[hi];
-                if (sum < target) {
-                    lo++;
-                } else if (sum > target) {
+                if (sum > target) {
                     hi--;
+                } else if (sum < target) {
+                    lo++;
                 } else {
                     res.emplace_back(vector<int>{nums[i], nums[lo], nums[hi]});
                     do {
-                        lo++;
-                    } while (lo < hi && nums[lo] == nums[lo - 1]); // duplicate
-                    do {
                         hi--;
                     } while (lo < hi && nums[hi] == nums[hi + 1]); // duplicate
+                    do {
+                        lo++;
+                    } while (lo < hi && nums[lo] == nums[lo - 1]); // duplicate
                 }
             }
         }

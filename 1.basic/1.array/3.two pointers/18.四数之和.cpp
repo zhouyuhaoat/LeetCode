@@ -33,18 +33,18 @@ public:
                 int lo = j + 1, hi = n - 1;
                 while (lo < hi) {
                     long long sum = sum4(nums[i], nums[j], nums[lo], nums[hi]);
-                    if (sum < target) {
-                        lo++;
-                    } else if (sum > target) {
+                    if (sum > target) {
                         hi--;
+                    } else if (sum < target) {
+                        lo++;
                     } else {
                         res.emplace_back(vector<int>{nums[i], nums[j], nums[lo], nums[hi]});
                         do {
-                            lo++;
-                        } while (lo < hi && nums[lo] == nums[lo - 1]);
-                        do {
                             hi--;
                         } while (lo < hi && nums[hi] == nums[hi + 1]);
+                        do {
+                            lo++;
+                        } while (lo < hi && nums[lo] == nums[lo - 1]);
                     }
                 }
             }
