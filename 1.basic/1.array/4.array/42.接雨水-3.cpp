@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-13 10:07:16
- *   modified:  2025-06-21 22:20:07
+ *   modified:  2025-11-14 11:52:26
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
@@ -16,11 +16,12 @@
 class Solution {
 public:
     int trap(vector<int>& height) {
-        int res = 0, boundary = 0; // the lower one of boundaries
-        for (int lo = 0, hi = height.size() - 1; lo < hi;) {
-            int base = height[lo] < height[hi] ? height[lo++] : height[hi--]; // lower one as base
-            res += max(0, boundary - base);
-            boundary = max(boundary, base);
+        int res = 0, bound = 0; // the lower one of bound
+        int lo = 0, hi = height.size() - 1;
+        while (lo < hi) {
+            int base = height[lo] < height[hi] ? height[lo++] : height[hi--]; // the lower one of height
+            res += max(0, bound - base);
+            bound = max(bound, base); // update for future
         }
         return res;
     }

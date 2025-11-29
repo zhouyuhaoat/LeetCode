@@ -17,7 +17,7 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         int n = height.size();
-        vector<int> left(n), right(n); // boundaries: max height to the left and right
+        vector<int> left(n), right(n); // bound: max height to the left and right
         for (int i = 1; i < n; i++) {
             left[i] = max(left[i - 1], height[i - 1]);
         }

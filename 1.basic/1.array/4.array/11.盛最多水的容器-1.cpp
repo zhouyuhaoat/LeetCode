@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-13 10:07:16
- *   modified:  2025-06-20 18:57:54
+ *   modified:  2025-11-14 11:52:05
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
@@ -16,15 +16,11 @@
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        int res = 0;
-        for (int lo = 0, hi = height.size() - 1; lo < hi;) {
-            res = max(res, min(height[lo], height[hi]) * (hi - lo));
-            /*
-                greedy
-                - move the lower one (bottleneck), the area may be larger
-                - if move higher, the area must be smaller, so move lower
-             */
-            height[lo] < height[hi] ? lo++ : hi--;
+        int res = 0, lo = 0, hi = height.size() - 1;
+        while (lo < hi) {
+            int area = min(height[lo], height[hi]) * (hi - lo);
+            res = max(res, area);
+            height[lo] < height[hi] ? lo++ : hi--; // move the lower one (bottleneck)
         }
         return res;
     }

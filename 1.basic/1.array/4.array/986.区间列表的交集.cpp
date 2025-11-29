@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-02-13 09:52:02
- *   modified:  2025-06-20 18:14:48
+ *   modified:  2025-11-14 11:52:21
  *   project:   LeetCode of labuladong
  *   venue:     226, Harbin
  */
@@ -23,7 +23,7 @@ public:
             if (start <= end) { // valid interval
                 res.emplace_back(vector<int>{start, end});
             }
-            firstList[lo][1] < secondList[hi][1] ? lo++ : hi++; // greedy: earlier end time
+            firstList[lo][1] < secondList[hi][1] ? lo++ : hi++; // earlier end time
         }
         return res;
     }
