@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-01-18 10:39:26
- *   modified:  2025-02-25 12:36:53
+ *   modified:  2025-02-22 11:45:07
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -24,30 +24,36 @@
  * };
  */
 class Solution {
+private:
+    pair<ListNode *, ListNode *> reverse(ListNode *head, ListNode *tail) {
+        ListNode *prev = nullptr, *curr = head;
+        while (prev != tail) {
+            ListNode *next = curr->next;
+            curr->next = prev;
+            prev = curr, curr = next;
+        }
+        return {tail, head};
+    }
+
+    ListNode *reverseKGroup(ListNode *head, int k) {
+        ListNode dummy(0, head), *pred = &dummy;
+        while (head) {
+            ListNode *tail = pred;
+            for (int i = 0; i < k; i++) {
+                tail = tail->next;
+                if (!tail) return dummy.next;
+            }
+            ListNode *succ = tail->next;
+            tie(head, tail) = reverse(head, tail);
+            pred->next = head, tail->next = succ;
+            pred = tail, head = succ;
+        }
+        return dummy.next;
+    }
+
 public:
     ListNode *swapPairs(ListNode *head) {
-        /*
-            swap pairs of nodes in a linked list
-            - pairs, backup, move
-            - for each pair, adjust pointers
-                - from left to right
-                0. prev -> curr -> next -> nextPair
-                1.    ------------>
-                   prev   curr -> next -> nextPair
-                2.    ------------->
-                   prev   curr <-> next -> nextPair
-                3. prev -> next -> curr -> nextPair
-        */
-        ListNode *dummy = new ListNode(0, head);
-        ListNode *prev = dummy, *curr = head;
-        while (curr && curr->next) {
-            ListNode *nextPair = curr->next->next;
-            prev->next = curr->next;
-            curr->next->next = curr;
-            curr->next = nextPair;
-            prev = curr, curr = nextPair;
-        }
-        return dummy->next;
+        return reverseKGroup(head, 2); // k = 2
     }
 };
 // @lc code=end

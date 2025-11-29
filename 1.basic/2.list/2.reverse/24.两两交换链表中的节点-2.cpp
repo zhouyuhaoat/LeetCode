@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-25 12:33:08
- *   modified:  2025-02-25 12:38:53
+ *   created:   2025-01-18 10:39:26
+ *   modified:  2025-02-22 11:45:07
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -16,26 +16,12 @@
 class Solution {
 public:
     ListNode *swapPairs(ListNode *head) {
-        /*
-            for each pair, adjust pointers
-                - from right to left
-                0. prev -> curr -> next -> nextPair
-                1.            ------------>
-                   prev -> curr   next -> nextPair
-                2.            ------------->
-                   prev -> curr <- next -> nextPair
-                3. prev -> next -> curr -> nextPair
-        */
-        ListNode *dummy = new ListNode(0, head);
-        ListNode *prev = dummy, *curr = head;
-        while (curr && curr->next) {
-            ListNode *next = curr->next;
-            curr->next = next->next;
-            next->next = curr;
-            prev->next = next;
-            prev = curr, curr = curr->next;
-        }
-        return dummy->next;
+        if (!head || !head->next) return head; // no pairs
+        // left -> right -> middle
+        ListNode *newHead = head->next;
+        head->next = swapPairs(head->next->next);
+        newHead->next = head;
+        return newHead;
     }
 };
 // @lc code=end

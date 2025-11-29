@@ -24,13 +24,9 @@
  * };
  */
 class Solution {
-public:
+private:
     pair<ListNode *, ListNode *> reverse(ListNode *head, ListNode *tail) {
-        /*
-            reverse a singly linked list [head, tail]
-            - until the previous node is the tail
-            - return [tail, head] as the new head and tail of the reversed list
-        */
+        // range reverse: [head, tail]
         ListNode *prev = nullptr, *curr = head;
         while (prev != tail) {
             ListNode *next = curr->next;
@@ -40,21 +36,22 @@ public:
         return {tail, head};
     }
 
+public:
     ListNode *reverseKGroup(ListNode *head, int k) {
-        ListNode *dummy = new ListNode(0, head), *prev = dummy;
+        ListNode dummy(0, head), *pred = &dummy;
         while (head) {
-            ListNode *tail = prev;
+            ListNode *tail = pred;
             for (int i = 0; i < k; i++) {
                 tail = tail->next;
-                if (!tail) return dummy->next;
+                if (!tail) return dummy.next;
             }
-            ListNode *nextGroup = tail->next;
-            // prev -> head -> ... -> tail -> nextGroup
+            ListNode *succ = tail->next;
+            // pred -> head -> ... -> tail -> succ
             tie(head, tail) = reverse(head, tail);
-            prev->next = head, tail->next = nextGroup; // connect
-            prev = tail, head = nextGroup; // move to next group
+            pred->next = head, tail->next = succ; // connect
+            pred = tail, head = succ; // shift
         }
-        return dummy->next;
+        return dummy.next;
     }
 };
 // @lc code=end

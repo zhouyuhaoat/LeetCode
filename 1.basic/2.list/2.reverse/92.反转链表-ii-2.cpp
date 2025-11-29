@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-01-18 10:39:25
- *   modified:  2025-02-22 11:56:32
+ *   modified:  2025-02-25 11:41:05
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,17 +14,17 @@
 
 // @lc code=start
 class Solution {
-public:
-    pair<ListNode *, ListNode *> reverse(ListNode *head, ListNode *tail) {
+private:
+    void reverse(ListNode *head) {
         ListNode *prev = nullptr, *curr = head;
-        while (prev != tail) {
+        while (curr) {
             ListNode *next = curr->next;
             curr->next = prev;
             prev = curr, curr = next;
         }
-        return {tail, head};
     }
 
+public:
     ListNode *reverseBetween(ListNode *head, int left, int right) {
         ListNode dummy(0, head), *pred = &dummy;
         for (int i = 0; i < left - 1; i++) {
@@ -35,8 +35,9 @@ public:
             hi = hi->next;
         }
         ListNode *succ = hi->next;
-        tie(lo, hi) = reverse(lo, hi);
-        pred->next = lo, hi->next = succ;
+        hi->next = nullptr; // cut for reverse
+        reverse(lo);
+        pred->next = hi, lo->next = succ; // reconnect
         return dummy.next;
     }
 };

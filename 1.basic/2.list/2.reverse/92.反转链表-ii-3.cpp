@@ -20,22 +20,16 @@ public:
         for (int i = 0; i < left - 1; i++) {
             pred = pred->next;
         }
-        /*
-            two pass -> one pass: online
-            0. pred -> left = curr -> ... -> right
-            1.      nullptr
-                        ^
-                        |
-               pred -> left <- ... <- right = prev, right + 1 = curr
-            2. pred -> right -> ... -> left -> right + 1
-        */
-        ListNode *prev = nullptr, *curr = pred->next;
+        ListNode *lo = pred->next;
+        ListNode *prev = nullptr, *curr = pred->next; // online
         for (int i = left - 1; i < right; i++) {
             ListNode *next = curr->next;
             curr->next = prev;
             prev = curr, curr = next;
         }
-        pred->next->next = curr, pred->next = prev;
+        ListNode *hi = prev, *succ = curr;
+        // pred -> lo <- ... <- hi   succ
+        pred->next = hi, lo->next = succ; // from left to right
         return dummy.next;
     }
 };

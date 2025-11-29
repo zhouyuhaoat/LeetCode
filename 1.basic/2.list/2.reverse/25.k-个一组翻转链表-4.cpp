@@ -29,16 +29,14 @@ public:
         ListNode dummy(0, head), *pred = &dummy;
         ListNode *prev = nullptr, *curr = head;
         for (int n = getSize(head); n >= k; n -= k) {
-            ListNode *head = pred->next;
+            head = pred->next;
             for (int i = 0; i < k; i++) {
                 ListNode *next = curr->next;
                 curr->next = prev;
                 prev = curr, curr = next;
             }
-            ListNode *tail = prev, *succ = curr;
-            // pred -> head <- ... <- tail   succ
-            pred->next = tail, head->next = succ; // from left to right
-            pred = head; // shift
+            pred->next->next = curr, pred->next = prev; // from right to left
+            pred = head;
         }
         return dummy.next;
     }

@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-01-18 10:39:25
- *   modified:  2025-02-28 09:43:45
+ *   modified:  2025-02-28 09:43:23
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -20,17 +20,13 @@ public:
         for (int i = 0; i < left - 1; i++) {
             pred = pred->next;
         }
-        /*
-            two pass -> one pass: head insertion with anchor
-            1. pred -> pred->next = head -> ... -> tail -> next -> next->next
-            2. pred -> pred->next = head = next -> ... -> tail -> next->next
-        */
-        ListNode *tail = pred->next; // fix the first node as the anchor
-        for (int i = left; i < right; i++) {
-            ListNode *next = tail->next;
-            tail->next = next->next;
-            next->next = pred->next, pred->next = next;
+        ListNode *prev = nullptr, *curr = pred->next;
+        for (int i = left - 1; i < right; i++) {
+            ListNode *next = curr->next;
+            curr->next = prev;
+            prev = curr, curr = next;
         }
+        pred->next->next = curr, pred->next = prev; // from right to left
         return dummy.next;
     }
 };
