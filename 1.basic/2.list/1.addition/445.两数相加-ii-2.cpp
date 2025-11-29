@@ -14,16 +14,16 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     ListNode *reverse(ListNode *head) {
-        if (!head->next) return head; // base case: only one node
+        if (!head->next) return head; // only one node
         ListNode *newHead = reverse(head->next);
         /*
                     nullptr            newHead
                        ^                  |
                        |                  v
             head -> head->next <- ... <- tail
-        */
+         */
         head->next->next = head;
         head->next = nullptr;
         return newHead;
@@ -42,6 +42,7 @@ public:
         return dummy.next;
     }
 
+public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         l1 = reverse(l1), l2 = reverse(l2);
         return reverse(add(l1, l2));

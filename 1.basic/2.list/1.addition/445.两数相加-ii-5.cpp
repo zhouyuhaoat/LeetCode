@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-01-18 10:39:26
- *   modified:  2025-02-25 12:24:52
+ *   created:   2025-01-18 23:36:53
+ *   modified:  2025-02-25 12:24:35
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,25 +14,28 @@
 
 // @lc code=start
 class Solution {
-public:
-    string toString(ListNode *head) {
-        string str;
+private:
+    stack<int> toStack(ListNode *head) {
+        stack<int> stk;
         while (head) {
-            str.push_back(head->val + '0');
+            stk.emplace(head->val);
             head = head->next;
         }
-        return str;
+        return stk;
     }
 
+public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        string str1 = toString(l1), str2 = toString(l2);
         ListNode *head = nullptr;
-        int i = str1.size() - 1, j = str2.size() - 1, carry = 0;
-        while (i >= 0 || j >= 0 || carry > 0) {
-            int sum = (i >= 0 ? str1[i--] - '0' : 0) + (j >= 0 ? str2[j--] - '0' : 0) + carry;
+        stack<int> stk1 = toStack(l1), stk2 = toStack(l2);
+        int carry = 0;
+        while (!stk1.empty() || !stk2.empty() || carry > 0) {
+            int sum = (stk1.empty() ? 0 : stk1.top()) + (stk2.empty() ? 0 : stk2.top()) + carry;
             carry = sum / 10;
+            if (!stk1.empty()) stk1.pop();
+            if (!stk2.empty()) stk2.pop();
             ListNode *curr = new ListNode(sum % 10);
-            curr->next = head, head = curr; // head insertion
+            curr->next = head, head = curr;
         }
         return head;
     }

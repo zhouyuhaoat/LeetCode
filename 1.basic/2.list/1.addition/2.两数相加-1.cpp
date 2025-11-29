@@ -31,7 +31,7 @@ public:
         while (l1 || l2 || carry > 0) {
             int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
             carry = sum / 10;
-            curr = curr->next = new ListNode(sum % 10); // right associativity
+            curr = curr->next = new ListNode(sum % 10);
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;
         }

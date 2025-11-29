@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-28 12:42:21
- *   modified:  2025-02-28 12:51:09
+ *   created:   2025-01-18 10:39:26
+ *   modified:  2025-02-25 12:24:52
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,43 +14,28 @@
 
 // @lc code=start
 class Solution {
+private:
+    string toString(ListNode *head) {
+        string str;
+        while (head) {
+            str.push_back(head->val + '0');
+            head = head->next;
+        }
+        return str;
+    }
+
 public:
-    ListNode *reverse(ListNode *head) {
-        /*
-            reverse a singly linked list by head insertion
-            - precondition: the head is not null
-            - fixed the first node as the tail, also an anchor
-            - move the next node after the tail to the front
-                - from the second node to the end
-                - until the next node is null
-            - first bypass the next node, then insert it at the front
-                - avoid the infinite loop when the tail is the head
-        */
-        ListNode *newHead = head, *tail = head;
-        while (tail->next) {
-            ListNode *next = tail->next;
-            tail->next = next->next, next->next = newHead;
-            newHead = next;
-        }
-        return newHead;
-    }
-
-    ListNode *add(ListNode *l1, ListNode *l2) {
-        ListNode dummy, *curr = &dummy;
-        int carry = 0;
-        while (l1 || l2 || carry > 0) {
-            int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + carry;
-            carry = sum / 10;
-            curr = curr->next = new ListNode(sum % 10);
-            if (l1) l1 = l1->next;
-            if (l2) l2 = l2->next;
-        }
-        return dummy.next;
-    }
-
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        l1 = reverse(l1), l2 = reverse(l2);
-        return reverse(add(l1, l2));
+        ListNode *head = nullptr;
+        string str1 = toString(l1), str2 = toString(l2);
+        int i = str1.size() - 1, j = str2.size() - 1, carry = 0; // reverse addition
+        while (i >= 0 || j >= 0 || carry > 0) {
+            int sum = (i >= 0 ? str1[i--] - '0' : 0) + (j >= 0 ? str2[j--] - '0' : 0) + carry;
+            carry = sum / 10;
+            ListNode *curr = new ListNode(sum % 10);
+            curr->next = head, head = curr; // head insertion
+        }
+        return head;
     }
 };
 // @lc code=end

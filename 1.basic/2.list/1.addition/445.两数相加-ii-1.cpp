@@ -24,26 +24,14 @@
  * };
  */
 class Solution {
-public:
+private:
     ListNode *reverse(ListNode *head) {
-        /*
-            reverse a singly linked list
-            1. backup
-                - backup the next node before reversing the pointer
-            2. reverse
-                - reverse the pointer to point to the previous node
-            3. shift
-                - shift the current node to the next node
-                - previous node becomes the current node
-            4. return the new head
-                - the last node of the original list becomes the new head of the reversed list
-                - at last, the current node becomes nullptr, so the previous node is the new head
-        */
+        // reverse a singly linked list
         ListNode *prev = nullptr, *curr = head;
         while (curr) {
-            ListNode *next = curr->next;
-            curr->next = prev;
-            prev = curr, curr = next;
+            ListNode *next = curr->next; // backup
+            curr->next = prev; // reverse
+            prev = curr, curr = next; // shift
         }
         return prev;
     }
@@ -61,6 +49,7 @@ public:
         return dummy.next;
     }
 
+public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         l1 = reverse(l1), l2 = reverse(l2);
         return reverse(add(l1, l2));

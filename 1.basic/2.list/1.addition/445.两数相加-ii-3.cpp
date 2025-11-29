@@ -14,9 +14,8 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     ListNode *reverse(ListNode *head) {
-        // reverse a singly linked list by head insertion
         ListNode *newHead = nullptr, *curr = head;
         while (curr) {
             ListNode *next = curr->next;
@@ -39,6 +38,7 @@ public:
         return dummy.next;
     }
 
+public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         l1 = reverse(l1), l2 = reverse(l2);
         return reverse(add(l1, l2));

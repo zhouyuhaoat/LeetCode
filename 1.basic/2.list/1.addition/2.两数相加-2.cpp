@@ -16,7 +16,7 @@
 class Solution {
 public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        if (!l1 && !l2) return nullptr; // base cases
+        if (!l1 && !l2) return nullptr;
         if (!l1 || !l2) return l1 ? l1 : l2;
         int sum = l1->val + l2->val;
         ListNode *head = new ListNode(sum % 10);
