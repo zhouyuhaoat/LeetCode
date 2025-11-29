@@ -27,7 +27,7 @@ class Solution {
 public:
     ListNode *deleteDuplicates(ListNode *head) {
         ListNode *curr = head;
-        while (curr && curr->next) { // pairs
+        while (curr && curr->next) { // adjacent
             ListNode *next = curr->next;
             if (curr->val == next->val) { // duplicate
                 curr->next = next->next;

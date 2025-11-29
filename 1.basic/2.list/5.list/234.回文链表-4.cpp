@@ -14,22 +14,16 @@
 
 // @lc code=start
 class Solution {
-public:
-    bool isPalindromeRecursive(ListNode *curr, ListNode *& front) {
-        /*
-            front -> ... -> middle -> ... -> back = curr -> nullptr
-            - base case: reach the end of the list
-            - recursive call to the next node until reaching the end
-            - recursive case: compare front and back
-            - move front forward before backtracking to middle
-        */
-        if (!curr) return true;
-        bool flag = isPalindromeRecursive(curr->next, front);
-        if (!flag || curr->val != front->val) return false;
-        front = front->next;
+private:
+    bool isPalindromeRecursive(ListNode *& front, ListNode *back) {
+        if (!back) return true; // until end
+        bool flag = isPalindromeRecursive(front, back->next);
+        if (!flag || front->val != back->val) return false;
+        front = front->next; // move front forward before backtrack back backward
         return true;
     }
 
+public:
     bool isPalindrome(ListNode *head) {
         return isPalindromeRecursive(head, head);
     }

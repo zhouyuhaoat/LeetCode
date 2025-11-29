@@ -16,11 +16,11 @@
 class Solution {
 public:
     ListNode *mergeKLists(vector<ListNode *>& lists) {
-        // priority queue is simply an improvement over the native multi-pointer merging approach
+        // native multi-pointer merge + get the min pointer by priority queue
         auto cmp = [](const ListNode *a, const ListNode *b) {
             return a->val > b->val;
         };
-        priority_queue<ListNode *, vector<ListNode *>, decltype(cmp)> q;
+        priority_queue<ListNode *, vector<ListNode *>, decltype(cmp)> q(cmp);
         for (ListNode *head : lists) {
             if (head) q.emplace(head);
         }

@@ -24,7 +24,7 @@
  * };
  */
 class Solution {
-public:
+private:
     ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
         ListNode dummy, *curr = &dummy;
         while (list1 && list2) {
@@ -40,6 +40,7 @@ public:
         return dummy.next;
     }
 
+public:
     ListNode *mergeKLists(vector<ListNode *>& lists) {
         ListNode *res = nullptr;
         for (ListNode *list : lists) {

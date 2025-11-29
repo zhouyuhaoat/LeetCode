@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-01-18 10:39:00
- *   modified:  2025-02-28 10:16:33
+ *   modified:  2025-02-27 19:01:13
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,26 +14,34 @@
 
 // @lc code=start
 class Solution {
-public:
-    struct cmp {
-        bool operator()(const ListNode *a, const ListNode *b) {
-            return a->val > b->val;
-        }
-    };
-
-    ListNode *mergeKLists(vector<ListNode *>& lists) {
-        priority_queue<ListNode *, vector<ListNode *>, cmp> q;
-        for (ListNode *head : lists) {
-            if (head) q.emplace(head);
-        }
+private:
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
         ListNode dummy, *curr = &dummy;
-        while (!q.empty()) {
-            ListNode *node = q.top();
-            q.pop();
-            if (node->next) q.emplace(node->next);
-            curr = curr->next = node;
+        while (list1 && list2) {
+            if (list1->val < list2->val) {
+                curr = curr->next = list1;
+                list1 = list1->next;
+            } else {
+                curr = curr->next = list2;
+                list2 = list2->next;
+            }
         }
+        curr->next = list1 ? list1 : list2;
         return dummy.next;
+    }
+
+    ListNode *merge(vector<ListNode *>& lists, int lo, int hi) { // divide and conquer
+        if (lo == hi) return nullptr;
+        if (lo + 1 == hi) return lists[lo];
+        int mi = lo + (hi - lo) / 2; // binary
+        // recursive: from top to down
+        ListNode *left = merge(lists, lo, mi), *right = merge(lists, mi, hi);
+        return mergeTwoLists(left, right);
+    }
+
+public:
+    ListNode *mergeKLists(vector<ListNode *>& lists) {
+        return merge(lists, 0, lists.size());
     }
 };
 // @lc code=end

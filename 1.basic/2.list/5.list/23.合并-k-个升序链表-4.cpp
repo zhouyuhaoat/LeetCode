@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     ListNode *mergeTwoLists(ListNode *list1, ListNode *list2) {
         ListNode dummy, *curr = &dummy;
         while (list1 && list2) {
@@ -30,16 +30,17 @@ public:
         return dummy.next;
     }
 
-    ListNode *merge(vector<ListNode *>& lists, int lo, int hi) { // divide and conquer
-        if (lo == hi) return nullptr;
-        if (lo + 1 == hi) return lists[lo];
-        int mi = lo + (hi - lo) / 2; // binary
-        ListNode *left = merge(lists, lo, mi), *right = merge(lists, mi, hi);
-        return mergeTwoLists(left, right);
-    }
-
+public:
     ListNode *mergeKLists(vector<ListNode *>& lists) {
-        return merge(lists, 0, lists.size());
+        int n = lists.size();
+        if (n == 0) return nullptr;
+        // iterative: from bottom to up
+        for (int stride = 1; stride < n; stride *= 2) {
+            for (int i = 0; i + stride < n; i += stride * 2) {
+                lists[i] = mergeTwoLists(lists[i], lists[i + stride]);
+            }
+        }
+        return lists[0];
     }
 };
 // @lc code=end

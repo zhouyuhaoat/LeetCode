@@ -14,8 +14,8 @@
 
 // @lc code=start
 class Solution {
-public:
-    ListNode *middle(ListNode *head) {
+private:
+    ListNode *middleNode(ListNode *head) {
         ListNode *slow = head, *fast = head;
         while (fast && fast->next) {
             slow = slow->next;
@@ -42,13 +42,14 @@ public:
         return true;
     }
 
+public:
     bool isPalindrome(ListNode *head) {
-        ListNode *mi = middle(head);
+        ListNode *mi = middleNode(head);
         ListNode *reverseHead = reverse(mi);
         ListNode *ptr1 = head, *ptr2 = reverseHead;
-        bool flag = compare(ptr1, ptr2);
+        bool res = compare(ptr1, ptr2);
         reverse(reverseHead); // revert
-        return flag;
+        return res;
     }
 };
 // @lc code=end
