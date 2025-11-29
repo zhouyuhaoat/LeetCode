@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     int getSize(ListNode *head) {
         int size = 0;
         while (head) {
@@ -24,13 +24,14 @@ public:
         return size;
     }
 
+public:
     ListNode *middleNode(ListNode *head) {
-        int id = getSize(head) / 2;
-        ListNode *middle = head;
-        while (id--) {
-            middle = middle->next;
+        int mi = getSize(head) / 2;
+        ListNode *median = head;
+        while (mi--) {
+            median = median->next;
         }
-        return middle;
+        return median;
     }
 };
 // @lc code=end

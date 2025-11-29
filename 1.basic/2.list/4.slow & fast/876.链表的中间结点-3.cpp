@@ -17,13 +17,6 @@ class Solution {
 public:
     ListNode *middleNode(ListNode *head) {
         ListNode *slow = head, *fast = head;
-        /*
-            minimum working example (MWE):
-            1. odd: 1, 3, ...
-                - fast stops at the tail
-            2. even: 2, ...
-                - fast stops until null
-        */
         while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;

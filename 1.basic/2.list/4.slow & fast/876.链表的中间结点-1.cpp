@@ -30,7 +30,7 @@ public:
         while (vec.back()->next) {
             vec.emplace_back(vec.back()->next);
         }
-        return vec[vec.size() / 2]; // (right) middle
+        return vec[vec.size() / 2]; // (right) median
     }
 };
 // @lc code=end

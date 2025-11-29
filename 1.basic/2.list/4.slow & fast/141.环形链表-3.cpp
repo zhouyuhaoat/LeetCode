@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     ListNode *reverse(ListNode *head) {
         ListNode *prev = nullptr, *curr = head;
         while (curr) {
@@ -25,18 +25,19 @@ public:
         return prev;
     }
 
+public:
     bool hasCycle(ListNode *head) {
         ListNode *reverseHead = reverse(head);
+        // loop -> reverse -> the same head pointer
         if (head && head->next && reverseHead == head) {
             /*
-                loop -> reverse -> the same head pointer
-                - original
+                1. original
                     3 -> 2 -> 0 -> -4
                          ^----------
-                - after reverse
+                2. after reverse
                     3 -> 2 <- 0 <- -4
                          ----------^
-            */
+             */
             return true;
         }
         return false;

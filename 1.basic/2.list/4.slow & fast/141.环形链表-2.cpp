@@ -16,20 +16,9 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+        // slow (tortoise) and fast (hare) pointers
         ListNode *slow = head, *fast = head;
-        /*
-            slow and fast pointers
-            - slow: tortoise; fast: hare
-            - relative speed
-                - slow moves 1 step, fast moves 2 steps
-                - stationary slow vs. moving fast
-            - no cycle
-                - fast will reach the end of the list
-            - cycle
-                - slow and fast will get stuck in the cycle
-                - fast will eventually catch up with slow
-        */
-        while (fast && fast->next) { // loop: at least 2 nodes
+        while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
             if (slow == fast) return true;

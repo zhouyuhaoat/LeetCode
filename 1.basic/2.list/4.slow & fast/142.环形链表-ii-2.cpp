@@ -16,26 +16,13 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        /*
-            slow and fast pointers
-            - Floyd's cycle detection algorithm
-            - list = non-cycle + cycle
-            - fast = 2 * slow; fast - slow = k * cycle
-                - slow = k * cycle
-            - target: find the entry of the cycle
-                - entry = non-cycle + k * cycle = non-cycle + slow
-                - make slow move forward non-cycle steps more
-            - the distance between slow and the entry is exactly non-cycle steps
-                - if slow starts from the entry, eventually it will returns to the entry
-                - however, since slow has already moved non-cycle steps, it hasn't reached the entry yet
-                - therefore, move non-cycle steps more, it will reach the entry of the cycle
-        */
+        // slow and fast pointers: Floyd's cycle detection algorithm
         ListNode *slow = head, *fast = head;
         while (fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
             if (slow == fast) {
-                ListNode *nonCycle = head;
+                ListNode *nonCycle = head; // move from head
                 while (slow != nonCycle) {
                     slow = slow->next;
                     nonCycle = nonCycle->next;
