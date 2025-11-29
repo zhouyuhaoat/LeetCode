@@ -16,19 +16,8 @@
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        // alternate traverse two lists with two pointers
         ListNode *p = headA, *q = headB;
-        /*
-            alternate traverse two lists with two pointers
-            - list: specific part + common or share part
-                A:  a ---------
-                                \
-                                  ----------- c
-                                /
-                B:   b --------
-            - a + c + b = b + c + a
-                - The key is that both pointers will traverse the same number of nodes.
-                - If there is no intersection (c = 0), both pointers will eventually reach nullptr.
-        */
         while (p != q) {
             p = p ? p->next : headB;
             q = q ? q->next : headA;

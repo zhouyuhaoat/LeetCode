@@ -26,17 +26,17 @@
 class Solution {
 public:
     ListNode *partition(ListNode *head, int x) {
-        ListNode list1, list2, *ptr1 = &list1, *ptr2 = &list2; // small, large
+        ListNode less, nonLess, *ptrLess = &less, *ptrNonLess = &nonLess; // small, large
         while (head) {
             if (head->val < x) {
-                ptr1 = ptr1->next = head;
+                ptrLess = ptrLess->next = head;
             } else {
-                ptr2 = ptr2->next = head;
+                ptrNonLess = ptrNonLess->next = head;
             }
             head = head->next;
         }
-        ptr1->next = list2.next, ptr2->next = nullptr;
-        return list1.next;
+        ptrLess->next = nonLess.next, ptrNonLess->next = nullptr;
+        return less.next;
     }
 };
 // @lc code=end

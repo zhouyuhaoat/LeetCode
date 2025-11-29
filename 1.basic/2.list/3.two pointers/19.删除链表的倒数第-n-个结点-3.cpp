@@ -16,18 +16,9 @@
 class Solution {
 public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
-        ListNode dummy{0, head};
+        // lead and follow pointers
+        ListNode dummy(0, head);
         ListNode *lo = &dummy, *hi = &dummy;
-        /*
-            lead and follow pointers
-            - lo = dummy
-                - ensure lo->next is not null
-                - for access lo->next->next if only one node
-            - same start
-                - distance between lo and hi
-                - hi is n nodes ahead of lo
-            - hi stops at the tail of the list
-        */
         while (n--) {
             hi = hi->next;
         }

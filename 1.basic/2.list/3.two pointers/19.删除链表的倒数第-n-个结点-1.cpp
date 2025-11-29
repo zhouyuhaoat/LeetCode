@@ -24,7 +24,7 @@
  * };
  */
 class Solution {
-public:
+private:
     int getSize(ListNode *head) {
         int size = 0;
         while (head) {
@@ -34,10 +34,11 @@ public:
         return size;
     }
 
-    ListNode *removeNthFromEnd(ListNode *head, int n) { // n: 1-based index
+public:
+    ListNode *removeNthFromEnd(ListNode *head, int n) { // 1-based index
         ListNode dummy(0, head), *prev = &dummy;
         int size = getSize(head);
-        // previous node: [size - n - 1] -> deleted node: [size - n]
+        // previous node [size - n - 1] -> deleted node [size - n]
         for (int i = 0; i < size - n; i++) {
             prev = prev->next;
         }
