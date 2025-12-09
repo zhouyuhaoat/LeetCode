@@ -14,14 +14,15 @@
 
 // @lc code=start
 class NumMatrix {
-public:
+private:
     vector<vector<int>> pre; // 1-dim prefix sum
 
+public:
     NumMatrix(vector<vector<int>>& matrix) {
-        int row = matrix.size(), col = matrix[0].size();
-        pre.resize(row, vector<int>(col + 1));
-        for (int i = 0; i < row; i++) {
-            for (int j = 1; j <= col; j++) {
+        int m = matrix.size(), n = matrix[0].size();
+        pre.resize(m, vector<int>(n + 1));
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j <= n; j++) {
                 pre[i][j] = pre[i][j - 1] + matrix[i][j - 1];
             }
         }

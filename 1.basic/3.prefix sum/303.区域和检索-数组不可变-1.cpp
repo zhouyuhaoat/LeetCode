@@ -14,26 +14,19 @@
 
 // @lc code=start
 class NumArray {
-public:
+private:
     vector<int> pre;
 
+public:
     NumArray(vector<int>& nums) {
-        pre.resize(nums.size() + 1);
+        pre.resize(nums.size() + 1); // prefix or cumulative sum
         for (int i = 1; i <= (int)nums.size(); i++) {
             pre[i] = pre[i - 1] + nums[i - 1];
-            /*
-                prefix or cumulative sum
-                - pre[i] = sum[0, i)
-                    - pre[i] = pre[i - 1] + nums[i - 1]
-                    - nums[i - 1] = pre[i] - pre[i - 1]
-                - sum[left, right) = sum[0, right) - sum[0, left)
-                    - sum[left, right) = pre[right] - pre[left]
-                - prefix: not include itself, all previous
-            */
         }
     }
 
-    int sumRange(int left, int right) { // sum[left, right] = sum[0, right + 1)
+    int sumRange(int left, int right) {
+        // [left, right] = [left, right + 1)
         return pre[right + 1] - pre[left];
     }
 };

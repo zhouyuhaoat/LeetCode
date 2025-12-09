@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-01-18 23:37:10
- *   modified:  2025-02-28 15:19:12
+ *   created:   2025-12-02 23:37:10
+ *   modified:  2025-12-03 15:19:12
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,15 +14,16 @@
 
 // @lc code=start
 class Solution {
-public:
-    int row, col;
+private:
+    int m, n;
     vector<vector<int>> pre;
 
+public:
     void prefixing(vector<vector<int>>& matrix) {
-        row = matrix.size(), col = matrix[0].size();
-        pre.resize(row + 1, vector<int>(col + 1, 0));
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= col; j++) {
+        m = matrix.size(), n = matrix[0].size();
+        pre.resize(m + 1, vector<int>(n + 1, 0));
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
                 pre[i][j] = pre[i - 1][j] + pre[i][j - 1] - pre[i - 1][j - 1] + matrix[i - 1][j - 1];
             }
         }
@@ -34,11 +35,11 @@ public:
 
     vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int k) {
         prefixing(mat);
-        vector<vector<int>> res(row, vector<int>(col));
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                int row1 = max(i - k, 0), col1 = max(j - k, 0); // at least 0
-                int row2 = min(i + k, row - 1), col2 = min(j + k, col - 1); // at most row - 1 and col - 1
+        vector<vector<int>> res(m, vector<int>(n));
+        for (int i = 0; i < m; i++) {
+            int row1 = max(i - k, 0), row2 = min(i + k, m - 1); // row
+            for (int j = 0; j < n; j++) {
+                int col1 = max(j - k, 0), col2 = min(j + k, n - 1); // col
                 res[i][j] = sumRegion(row1, col1, row2, col2);
             }
         }
