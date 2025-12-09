@@ -19,23 +19,9 @@ public:
         ListNode dummy(0, head), *pred = &dummy;
         ListNode *curr = head;
         while (curr && curr->next) {
-            ListNode *next = curr->next, *succ = curr->next->next;
-            pred->next = next, curr->next = succ, next->next = curr;
-            /*
-                left -> right -> middle
-                1. left: pred->next = next
-                       ------------>
-                    pred   curr -> next -> succ
-                2. right: curr->next = succ
-                       ----------->
-                    pred   curr   next -> succ
-                              ------------>
-                3. middle: next->next = curr
-                       ------------>
-                    pred   curr <- next   succ
-                              ------------>
-             */
-            pred = curr, curr = succ;
+            pred->next = curr->next, curr->next = curr->next->next, pred->next->next = curr;
+            // left -> right -> middle
+            pred = curr, curr = curr->next;
         }
         return dummy.next;
     }

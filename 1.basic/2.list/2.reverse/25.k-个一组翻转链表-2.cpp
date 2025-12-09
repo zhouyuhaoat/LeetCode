@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-01-18 10:39:24
- *   modified:  2025-02-22 11:51:21
+ *   created:   2025-01-18 10:39:25
+ *   modified:  2025-02-22 11:48:04
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -14,21 +14,33 @@
 
 // @lc code=start
 class Solution {
+private:
+    int getSize(ListNode *head) {
+        int size = 0;
+        while (head) {
+            size++;
+            head = head->next;
+        }
+        return size;
+    }
+
 public:
     ListNode *reverseKGroup(ListNode *head, int k) {
-        ListNode *ptr = head;
-        for (int i = 0; i < k; i++) {
-            if (!ptr) return head;
-            ptr = ptr->next;
-        }
+        ListNode dummy(0, head), *pred = &dummy;
         ListNode *prev = nullptr, *curr = head;
-        for (int i = 0; i < k; i++) {
-            ListNode *next = curr->next;
-            curr->next = prev;
-            prev = curr, curr = next;
+        for (int n = getSize(head); n >= k; n -= k) {
+            ListNode *head = pred->next;
+            for (int i = 0; i < k; i++) {
+                ListNode *next = curr->next;
+                curr->next = prev;
+                prev = curr, curr = next;
+            }
+            ListNode *tail = prev, *succ = curr;
+            // pred -> head <- ... <- tail   succ
+            pred->next = tail, head->next = succ; // from left to right
+            pred = head; // shift
         }
-        head->next = reverseKGroup(curr, k);
-        return prev;
+        return dummy.next;
     }
 };
 // @lc code=end

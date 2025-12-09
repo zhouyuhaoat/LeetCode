@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2025-02-25 12:33:08
- *   modified:  2025-02-25 12:38:53
+ *   created:   2025-01-18 10:39:26
+ *   modified:  2025-02-25 12:36:53
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -20,19 +20,20 @@ public:
         ListNode *curr = head;
         while (curr && curr->next) {
             ListNode *next = curr->next, *succ = curr->next->next;
-            curr->next = succ, next->next = curr, pred->next = next;
+            pred->next = next, curr->next = succ, next->next = curr;
             /*
-                from right to left
-                1. right: curr->next = succ
-                    pred -> curr   next -> succ
-                               ------------>
-                2. middle: next->next = curr
-                    pred -> curr <- next   succ
-                               ------------>
-                3. left: pred->next = next
+                left -> right -> middle
+                1. left: pred->next = next
+                       ------------>
+                    pred   curr -> next -> succ
+                2. right: curr->next = succ
+                       ----------->
+                    pred   curr   next -> succ
+                              ------------>
+                3. middle: next->next = curr
                        ------------>
                     pred   curr <- next   succ
-                               ----------->
+                              ------------>
              */
             pred = curr, curr = succ;
         }

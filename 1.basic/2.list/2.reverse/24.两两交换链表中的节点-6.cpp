@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-01-18 10:39:26
- *   modified:  2025-02-25 12:36:53
+ *   modified:  2025-02-22 11:45:07
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -16,14 +16,12 @@
 class Solution {
 public:
     ListNode *swapPairs(ListNode *head) {
-        ListNode dummy(0, head), *pred = &dummy;
-        ListNode *curr = head;
-        while (curr && curr->next) {
-            pred->next = curr->next, curr->next = curr->next->next, pred->next->next = curr;
-            // left -> right -> middle
-            pred = curr, curr = curr->next;
-        }
-        return dummy.next;
+        if (!head || !head->next) return head; // no pairs
+        // left -> right -> middle
+        ListNode *newHead = head->next;
+        head->next = swapPairs(head->next->next);
+        newHead->next = head;
+        return newHead;
     }
 };
 // @lc code=end
