@@ -30,10 +30,10 @@ public:
         stack<int> stk1 = toStack(l1), stk2 = toStack(l2);
         int carry = 0;
         while (!stk1.empty() || !stk2.empty() || carry > 0) {
-            int sum = (stk1.empty() ? 0 : stk1.top()) + (stk2.empty() ? 0 : stk2.top()) + carry;
+            int sum = carry;
+            if (!stk1.empty()) sum += stk1.top(), stk1.pop();
+            if (!stk2.empty()) sum += stk2.top(), stk2.pop();
             carry = sum / 10;
-            if (!stk1.empty()) stk1.pop();
-            if (!stk2.empty()) stk2.pop();
             ListNode *curr = new ListNode(sum % 10);
             curr->next = head, head = curr;
         }

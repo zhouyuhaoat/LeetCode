@@ -18,9 +18,10 @@ public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2, int carry = 0) {
         if (!l1 && !l2) return carry > 0 ? new ListNode(carry) : nullptr;
         if (!l1) swap(l1, l2); // assure l1 is not null
-        int sum = l1->val + (l2 ? l2->val : 0) + carry;
+        int sum = l1->val + carry;
+        if (l2) sum += l2->val, l2 = l2->next;
         l1->val = sum % 10; // in place, no need to create new node
-        l1->next = addTwoNumbers(l1->next, l2 ? l2->next : nullptr, sum / 10);
+        l1->next = addTwoNumbers(l1->next, l2, sum / 10);
         return l1;
     }
 };
