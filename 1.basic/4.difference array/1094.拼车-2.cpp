@@ -17,7 +17,7 @@ class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         map<int, int> seats;
-        for (auto& trip : trips) {
+        for (auto trip : trips) {
             int num = trip[0], from = trip[1], to = trip[2];
             seats[from] += num, seats[to] -= num;
         }

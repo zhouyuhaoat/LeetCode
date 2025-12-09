@@ -17,13 +17,13 @@ class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         vector<pair<int, int>> seats; // {index, change}
-        for (auto& trip : trips) {
+        for (auto trip : trips) {
             int num = trip[0], from = trip[1], to = trip[2];
             seats.emplace_back(from, num);
             seats.emplace_back(to, -num);
         }
         ranges::sort(seats);
-        int cap = 0; // prefix or cumulative sum
+        int cap = 0; // prefix sum
         for (auto [_, val] : seats) {
             cap += val;
             if (cap > capacity) return false;

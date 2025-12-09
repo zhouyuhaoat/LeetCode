@@ -26,10 +26,10 @@ public:
         }
     }
 
-    void update(int left, int right, int val) { // [left, right]
+    void update(int left, int right, int val) { // [left, right)
         diff[left] += val;
-        if (right + 1 < (int)diff.size()) {
-            diff[right + 1] -= val;
+        if (right < (int)diff.size()) {
+            diff[right] -= val;
         }
     }
 
@@ -37,7 +37,7 @@ public:
         vector<int> res(diff.size());
         res[0] = diff[0];
         for (int i = 1; i < (int)diff.size(); i++) {
-            res[i] = res[i - 1] + diff[i]; // prefix or cumulative sum
+            res[i] = res[i - 1] + diff[i]; // prefix sum
         }
         return res;
     }
@@ -46,11 +46,11 @@ public:
 class Solution {
 public:
     vector<int> corpFlightBookings(vector<vector<int>>& bookings, int n) {
-        vector<int> nums(n, 0);
+        vector<int> nums(n);
         Difference diff(nums);
-        for (auto& booking : bookings) {
+        for (auto booking : bookings) {
             int first = booking[0] - 1, last = booking[1] - 1, val = booking[2];
-            diff.update(first, last, val);
+            diff.update(first, last + 1, val); // [first, last] = [first, last + 1)
         }
         return diff.getResult();
     }
