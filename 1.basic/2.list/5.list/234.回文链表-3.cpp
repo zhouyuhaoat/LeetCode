@@ -44,8 +44,8 @@ private:
 
 public:
     bool isPalindrome(ListNode *head) {
-        ListNode *mi = middleNode(head);
-        ListNode *reverseHead = reverse(mi);
+        ListNode *median = middleNode(head);
+        ListNode *reverseHead = reverse(median);
         ListNode *ptr1 = head, *ptr2 = reverseHead;
         bool res = compare(ptr1, ptr2);
         reverse(reverseHead); // revert

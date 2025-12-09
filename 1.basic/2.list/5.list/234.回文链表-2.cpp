@@ -50,8 +50,8 @@ private:
 
 public:
     bool isPalindrome(ListNode *head) {
-        ListNode *mi = middleNode(head);
-        ListNode *reverseHead = reverse(mi);
+        ListNode *median = middleNode(head);
+        ListNode *reverseHead = reverse(median);
         return compare(head, reverseHead);
     }
 };
