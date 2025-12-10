@@ -16,12 +16,7 @@
 class Solution {
 public:
     int minAddToMakeValid(string s) {
-        /*
-            stack: all same elements
-            - all left parentheses
-            - maintain the stack => update variable regarding the stack size
-        */
-        int ins = 0, left = 0;
+        int ins = 0, left = 0; // stack -> variable
         for (char ch : s) {
             if (ch == '(') {
                 left++;

@@ -14,7 +14,7 @@
 
 // @lc code=start
 class Solution {
-public:
+private:
     void balance(int& ins, int& left, int& right, int k) {
         int mod = right % k;
         if (mod != 0) { // aligning
@@ -28,16 +28,19 @@ public:
         }
     }
 
+public:
     int minInsertions(string s) {
         int ins = 0, left = 0, right = 0, k = 2;
-        for (int i = 0; i < (int)s.size(); i++) {
-            if (s[i] == '(') {
+        for (int i = 0, n = s.size(); i < n;) {
+            while (i < n && s[i] == '(') {
                 left++;
-            } else {
-                right++;
-                if (i + 1 < (int)s.size() && s[i + 1] == ')') continue;
-                balance(ins, left, right, k);
+                i++;
             }
+            while (i < n && s[i] == ')') {
+                right++;
+                i++;
+            }
+            balance(ins, left, right, k);
         }
         ins += k * left - right;
         return ins;

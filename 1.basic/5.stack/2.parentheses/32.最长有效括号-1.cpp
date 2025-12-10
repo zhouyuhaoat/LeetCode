@@ -21,11 +21,11 @@ public:
             if (s[i] == '(') {
                 stk.emplace(i); // index
             } else if (!stk.empty()) {
-                s[stk.top()] = s[i] = '*'; // mark open and close if valid
+                s[stk.top()] = s[i] = '*'; // mark
                 stk.pop();
             }
         }
-        int res = 0, cnt = 0; // longest continuous substring of valid
+        int res = 0, cnt = 0; // longest continuous substring
         for (char ch : s) {
             if (ch == '*') {
                 cnt++;

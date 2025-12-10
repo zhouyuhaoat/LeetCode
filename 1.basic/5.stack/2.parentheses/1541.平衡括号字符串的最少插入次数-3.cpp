@@ -16,12 +16,7 @@
 class Solution {
 public:
     int minInsertions(string s) {
-        /*
-            stack: all same elements
-            - all left parentheses
-            - maintain the stack => update variable regarding the stack size
-        */
-        int ins = 0, left = 0;
+        int ins = 0, left = 0; // stack -> variable
         for (int i = 0; i < (int)s.size(); i++) {
             if (s[i] == '(') {
                 left++;
