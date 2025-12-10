@@ -14,34 +14,23 @@
 
 // @lc code=start
 class MyStack {
-public:
+private:
     queue<int> q;
-    /*
-        use a queue to implement a stack
-        1. enqueue:
-            -----------------------
-            top <--- bottom new_top
-            -----------------------
-        2. rotate: after enqueue, rotate the queue by (cycle) moving
-            -----------------------
-          < top <--- bottom new_top <
-          | ----------------------- |
-          >------------------------->
-        3. after enqueue and rotate:
-            -----------------------
-            new_top top <--- bottom
-            -----------------------
-    */
 
+    void rotate() {
+        for (int i = 0; i < (int)q.size() - 1; i++) {
+            q.emplace(q.front());
+            q.pop();
+        }
+    }
+
+public:
     MyStack() {
     }
 
     void push(int x) {
         q.emplace(x);
-        for (int i = 0; i < (int)q.size() - 1; i++) {
-            q.emplace(q.front());
-            q.pop();
-        }
+        rotate();
     }
 
     int pop() {

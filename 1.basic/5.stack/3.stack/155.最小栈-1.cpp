@@ -14,9 +14,10 @@
 
 // @lc code=start
 class MinStack {
-public:
-    stack<int> stk, minStk; // auxiliary stack for minimums
+private:
+    stack<int> stk, minStk; // auxiliary stack
 
+public:
     MinStack() {
         minStk.emplace(INT_MAX); // sentinel
     }

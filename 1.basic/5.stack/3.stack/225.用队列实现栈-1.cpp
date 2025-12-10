@@ -14,34 +14,23 @@
 
 // @lc code=start
 class MyStack {
-public:
-    queue<int> q1, q2; // main, auxiliary
-    /*
-        use two queues to implement a stack
-        1. q1:
-            ---------------
-            top <--- bottom
-            ---------------
-        2. q2:
-            -------
-            new_top
-            -------
-        3. q2 <- q1: after enqueue, push all elements in q1 into q2
-            -----------------------
-            new_top top <--- bottom
-            -----------------------
-        4. swap(q1, q2):
-    */
+private:
+    queue<int> q1, q2; // buffer queue
 
+    void shift() { // q1 -> q2
+        while (!q1.empty()) {
+            q2.emplace(q1.front());
+            q1.pop();
+        }
+    }
+
+public:
     MyStack() {
     }
 
     void push(int x) {
         q2.emplace(x);
-        while (!q1.empty()) {
-            q2.emplace(q1.front());
-            q1.pop();
-        }
+        shift();
         swap(q1, q2);
     }
 

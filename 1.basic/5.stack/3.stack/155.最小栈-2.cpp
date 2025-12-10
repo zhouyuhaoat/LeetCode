@@ -14,9 +14,10 @@
 
 // @lc code=start
 class MinStack {
-public:
+private:
     stack<pair<int, int>> stk; // {value, minimum}
 
+public:
     MinStack() {
         stk.emplace(0, INT_MAX);
     }

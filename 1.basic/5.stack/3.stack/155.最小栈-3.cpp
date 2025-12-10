@@ -14,21 +14,17 @@
 
 // @lc code=start
 class MinStack {
-public:
-    /*
-        synchronous -> asynchronous
-        - maintain auxiliary stack only when necessary
-        - necessary: include equal
-    */
-    stack<int> stk, minStk;
+private:
+    stack<int> stk, minStk; // synchronous -> asynchronous
 
+public:
     MinStack() {
         minStk.emplace(INT_MAX);
     }
 
     void push(int val) {
         stk.emplace(val);
-        if (val <= minStk.top()) {
+        if (val <= minStk.top()) { // minimum value
             minStk.emplace(val);
         }
     }
@@ -36,7 +32,7 @@ public:
     void pop() {
         int top = stk.top();
         stk.pop();
-        if (top == minStk.top()) {
+        if (top == minStk.top()) { // minimum value
             minStk.pop();
         }
     }

@@ -14,20 +14,17 @@
 
 // @lc code=start
 class MyQueue {
-public:
-    stack<int> inStk, outStk;
-    /*
-        use two stacks to implement a queue
-        - out ] [ in <=> front ... end] [front ... end
-        1. in:
-            ] [ <---
-        2. flip when out is empty:
-            <------------<
-            >---> ] [ --->
-        3. out:
-            <--- ] [
-    */
+private:
+    stack<int> outStk, inStk;
 
+    void rotate() { // outStk <- inStk
+        while (!inStk.empty()) {
+            outStk.emplace(inStk.top());
+            inStk.pop();
+        }
+    }
+
+public:
     MyQueue() {
     }
 
@@ -42,12 +39,7 @@ public:
     }
 
     int peek() {
-        if (outStk.empty()) {
-            while (!inStk.empty()) {
-                outStk.emplace(inStk.top());
-                inStk.pop();
-            }
-        }
+        if (outStk.empty()) rotate();
         return outStk.top();
     }
 

@@ -19,7 +19,7 @@ public:
         // reverse polish notation, postfix notation
         stack<int> stk;
         for (string& token : tokens) {
-            if (isdigit(token.back())) { // negative begins with '-'
+            if (isdigit(token.back())) {
                 stk.emplace(stoi(token));
             } else {
                 int b = stk.top();
