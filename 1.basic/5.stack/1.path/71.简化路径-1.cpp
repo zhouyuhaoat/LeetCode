@@ -17,7 +17,6 @@ class Solution {
 public:
     string simplifyPath(string path) {
         auto split = [](const string& s, char delim) {
-            // first, last and continuous delimiters -> empty string
             vector<string> words;
             istringstream ss(s);
             string token;
