@@ -22,7 +22,7 @@ public:
         }
         vector<int> res;
         priority_queue<pair<int, int>> pq;
-        for (auto& [num, freq] : cnt) {
+        for (auto [num, freq] : cnt) {
             pq.emplace(freq, num);
             if ((int)pq.size() > (int)cnt.size() - k) {
                 res.emplace_back(pq.top().second);

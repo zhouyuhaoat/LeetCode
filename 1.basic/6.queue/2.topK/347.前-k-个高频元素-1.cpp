@@ -21,7 +21,7 @@ public:
             cnt[num]++;
         }
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        for (auto& [num, freq] : cnt) {
+        for (auto [num, freq] : cnt) {
             pq.emplace(freq, num); // {freq, num}
             if ((int)pq.size() > k) {
                 pq.pop();

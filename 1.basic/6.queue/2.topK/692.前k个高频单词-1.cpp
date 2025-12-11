@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2024-12-14 16:40:57
- *   modified:  2025-03-02 22:52:18
+ *   created:   2024-12-10 22:14:07
+ *   modified:  2025-03-03 08:22:52
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -20,14 +20,23 @@ public:
         for (string& word : words) {
             cnt[word]++;
         }
-        vector<string> res;
-        for (auto& [word, _] : cnt) {
-            res.emplace_back(word);
+        auto cmp = [](const pair<string, int>& a, const pair<string, int>& b) {
+            return a.second != b.second ? a.second > b.second : a.first < b.first;
+            // sort by frequency in ascending order, then by lexicographical order in descending order
+        };
+        priority_queue<pair<string, int>, vector<pair<string, int>>, decltype(cmp)> pq(cmp);
+        for (auto& it : cnt) {
+            pq.emplace(it);
+            if ((int)pq.size() > k) {
+                pq.pop();
+            }
         }
-        ranges::sort(res, [&cnt](const string& a, const string& b) {
-            return cnt[a] != cnt[b] ? cnt[a] > cnt[b] : a < b;
-        });
-        res.erase(res.begin() + k, res.end());
+        vector<string> res;
+        while (!pq.empty()) {
+            res.emplace_back(pq.top().first);
+            pq.pop();
+        }
+        ranges::reverse(res);
         return res;
     }
 };

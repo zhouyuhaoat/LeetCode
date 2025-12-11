@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2024-12-14 21:52:11
- *   modified:  2025-03-03 08:26:15
+ *   created:   2025-03-02 23:05:13
+ *   modified:  2025-03-02 23:08:54
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -15,26 +15,19 @@
 // @lc code=start
 class Solution {
 public:
-    struct cmp {
-        bool operator()(const pair<int, string>& a, const pair<int, string>& b) {
-            return a.first != b.first ? a.first > b.first : a.second < b.second;
-        }
-    };
     vector<string> topKFrequent(vector<string>& words, int k) {
         unordered_map<string, int> cnt;
         for (string& word : words) {
             cnt[word]++;
         }
-        priority_queue<pair<int, string>, vector<pair<int, string>>, cmp> pq;
-        for (pair<string, int> it : cnt) {
-            pq.emplace(it.second, it.first); // {freq, word}
-            if ((int)pq.size() > k) {
-                pq.pop();
-            }
-        }
-        vector<string> res(k); // reserve for reverse
-        while (!pq.empty()) {
-            res[--k] = pq.top().second;
+        auto cmp = [](const pair<string, int>& a, const pair<string, int>& b) {
+            return a.second != b.second ? a.second < b.second : a.first > b.first;
+            // sort by frequency in descending order, then by lexicographical order in ascending order
+        };
+        priority_queue<pair<string, int>, vector<pair<string, int>>, decltype(cmp)> pq(cnt.begin(), cnt.end(), cmp);
+        vector<string> res;
+        while (k--) {
+            res.emplace_back(pq.top().first);
             pq.pop();
         }
         return res;

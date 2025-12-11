@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2024-12-10 22:14:07
- *   modified:  2025-03-03 08:22:52
+ *   created:   2024-12-14 21:52:11
+ *   modified:  2025-03-03 08:26:15
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -22,7 +22,6 @@ public:
         }
         auto cmp = [](const pair<string, int>& a, const pair<string, int>& b) {
             return a.second != b.second ? a.second > b.second : a.first < b.first;
-            // sort by frequency in ascending order, then by lexicographical order in descending order
         };
         priority_queue<pair<string, int>, vector<pair<string, int>>, decltype(cmp)> pq(cmp);
         for (auto& it : cnt) {
@@ -31,12 +30,11 @@ public:
                 pq.pop();
             }
         }
-        vector<string> res;
+        vector<string> res(k); // reserve for reverse
         while (!pq.empty()) {
-            res.emplace_back(pq.top().first);
+            res[--k] = pq.top().first;
             pq.pop();
         }
-        ranges::reverse(res);
         return res;
     }
 };
