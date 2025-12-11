@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2024-12-10 22:04:27
- *   modified:  2025-03-01 20:23:08
+ *   created:   2024-12-11 22:10:18
+ *   modified:  2025-03-01 20:25:16
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -16,8 +16,11 @@
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        nth_element(nums.begin(), nums.begin() + k - 1, nums.end(), greater<int>());
-        return nums[k - 1];
+        priority_queue<int> pq(nums.begin(), nums.end());
+        for (int i = 0; i < k - 1; i++) {
+            pq.pop();
+        }
+        return pq.top();
     }
 };
 // @lc code=end
