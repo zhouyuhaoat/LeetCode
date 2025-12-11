@@ -16,18 +16,19 @@
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> pq;
-        for (int j = 0; j < (int)matrix[0].size(); j++) {
-            pq.emplace(matrix[0][j], 0, j);
+        int m = matrix.size(), n = matrix[0].size();
+        priority_queue<tuple<int, int, int>> pq;
+        for (int i = 0; i < m; i++) {
+            pq.emplace(-matrix[i][0], i, 0); // negative
         }
         while (--k) {
-            auto [_, x, y] = pq.top();
+            auto [_, i, j] = pq.top();
             pq.pop();
-            if (x + 1 < (int)matrix.size()) {
-                pq.emplace(matrix[x + 1][y], x + 1, y);
+            if (j + 1 < n) {
+                pq.emplace(-matrix[i][j + 1], i, j + 1);
             }
         }
-        return get<0>(pq.top());
+        return -get<0>(pq.top());
     }
 };
 // @lc code=end

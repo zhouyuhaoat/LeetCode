@@ -14,27 +14,28 @@
 
 // @lc code=start
 class Solution {
-public:
-    int count(vector<vector<int>>& matrix, int val, int n) {
+private:
+    int zigzag_count(vector<vector<int>>& A, int e) {
+        int m = A.size(), n = A[0].size();
         int i = 0, j = n - 1, cnt = 0;
-        // top-right corner -> bottom-left corner
-        while (i < n && j >= 0) {
-            if (matrix[i][j] <= val) {
+        while (i < m && j >= 0) {
+            if (A[i][j] > e) {
+                j--;
+            } else {
                 cnt += j + 1; // row by row
                 i++;
-            } else {
-                j--;
             }
         }
         return cnt;
     }
 
+public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        int n = matrix.size();
-        int lo = matrix[0][0], hi = matrix[n - 1][n - 1] + 1;
+        int m = matrix.size(), n = matrix[0].size();
+        int lo = matrix[0][0], hi = matrix[m - 1][n - 1] + 1;
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
-            if (count(matrix, mi, n) >= k) {
+            if (zigzag_count(matrix, mi) >= k) {
                 hi = mi;
             } else {
                 lo = mi + 1;

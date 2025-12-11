@@ -14,17 +14,19 @@
 
 // @lc code=start
 class Solution {
-public:
-    long long count(vector<int>& nums1, vector<int>& nums2, int val) {
+private:
+    vector<vector<int>> res;
+
+    long long zigzag_count(vector<int>& nums1, vector<int>& nums2, int e) {
         long long cnt = 0;
         int m = nums1.size(), n = nums2.size();
         int i = 0, j = n - 1;
         while (i < m && j >= 0) {
-            if (nums1[i] + nums2[j] <= val) {
-                cnt += j + 1;
-                i++;
-            } else {
+            if (nums1[i] + nums2[j] > e) {
                 j--;
+            } else {
+                cnt += j + 1; // row by row
+                i++;
             }
         }
         return cnt;
@@ -34,7 +36,7 @@ public:
         int lo = nums1[0] + nums2[0], hi = nums1.back() + nums2.back() + 1;
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
-            if (count(nums1, nums2, mi) >= k) {
+            if (zigzag_count(nums1, nums2, mi) >= k) {
                 hi = mi;
             } else {
                 lo = mi + 1;
@@ -43,46 +45,53 @@ public:
         return lo;
     }
 
-    vector<vector<int>> lessSum(vector<int>& nums1, vector<int>& nums2, int& k, int sum) {
-        vector<vector<int>> res;
+    void lessThan(vector<int>& nums1, vector<int>& nums2, int& k, int sum) {
         int m = nums1.size(), n = nums2.size();
         int i = 0, j = n - 1;
         while (i < m && j >= 0) {
-            if (nums1[i] + nums2[j] < sum) { // less than sum
+            if (nums1[i] + nums2[j] >= sum) {
+                j--;
+            } else { // less than sum
                 for (int col = 0; col <= j && k > 0; col++, k--) {
                     res.emplace_back(vector<int>{nums1[i], nums2[col]});
                 }
                 i++;
-            } else {
-                j--;
             }
         }
-        return res;
     }
 
-    vector<vector<int>> equalSum(vector<int>& nums1, vector<int>& nums2, int& k, int sum) {
-        vector<vector<int>> res;
+    void equalTo(vector<int>& nums1, vector<int>& nums2, int& k, int sum) {
         int m = nums1.size(), n = nums2.size();
-        for (int i = 0, j = n - 1; i < m && k > 0; i++) {
-            int lo = i;
-            while (i + 1 < m && nums1[i + 1] == nums1[i]) i++; // duplicate
-            while (j >= 0 && nums1[i] + nums2[j] > sum) j--; // less and equal to sum
-            int hi = j;
-            while (j - 1 >= 0 && nums2[j - 1] == nums2[j]) j--;
-            if (nums1[i] + nums2[j] != sum) continue;
-            int cnt = (long long)(i - lo + 1) * (hi - j + 1);
-            while (cnt-- > 0 && k-- > 0) {
-                res.emplace_back(vector<int>{nums1[i], nums2[j]});
+        int i = 0, j = n - 1;
+        while (i < m && j >= 0) {
+            if (nums1[i] + nums2[j] > sum) {
+                j--;
+            } else if (nums1[i] + nums2[j] < sum) {
+                i++;
+            } else { // equal to sum
+                int cnt1 = 0, cnt2 = 0;
+                int val1 = nums1[i], val2 = nums2[j];
+                while (i < m && nums1[i] == val1) {
+                    cnt1++;
+                    i++;
+                }
+                while (j >= 0 && nums2[j] == val2) {
+                    cnt2++;
+                    j--;
+                }
+                long long cnt = (long long)cnt1 * cnt2;
+                while (cnt-- > 0 && k-- > 0) {
+                    res.emplace_back(vector<int>{val1, val2});
+                }
             }
         }
-        return res;
     }
 
+public:
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         int sum = lower_bound(nums1, nums2, k);
-        vector<vector<int>> res = lessSum(nums1, nums2, k, sum);
-        vector<vector<int>> equ = equalSum(nums1, nums2, k, sum);
-        res.insert(res.end(), equ.begin(), equ.end());
+        lessThan(nums1, nums2, k, sum);
+        equalTo(nums1, nums2, k, sum);
         return res;
     }
 };

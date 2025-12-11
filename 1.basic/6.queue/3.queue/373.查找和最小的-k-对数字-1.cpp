@@ -20,20 +20,7 @@ public:
             return nums1[a.first] + nums2[a.second] > nums1[b.first] + nums2[b.second];
         };
         priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> pq(cmp);
-        /*
-            traverse in the grid or matrix [0, i) x [0, j)
-            1. right and down in the grid
-                - (0, 0) -> (i - 1, j - 1)
-            2. only right in the grid
-                - (0 ... i - 1, 0) -> (0 ... i - 1, j - 1)
-            3. only down in the grid
-                - (0, 0 ... j - 1) -> (i - 1, 0 ... j - 1)
-            - transpose the grid
-                - down in the grid is the same as right in the grid
-            - merge optimization
-                - use priority queue to optimize multi-way merge, as merge multiple sorted list
-        */
-        for (int i = 0; i < min((int)nums1.size(), k); i++) {
+        for (int i = 0; i < min((int)nums1.size(), k); i++) { // multi-way merge
             pq.emplace(i, 0);
         }
         vector<vector<int>> res;

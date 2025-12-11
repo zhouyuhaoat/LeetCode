@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
- *   created:   2024-12-15 15:48:45
- *   modified:  2025-03-02 13:01:53
+ *   created:   2025-03-02 12:38:55
+ *   modified:  2025-03-02 13:04:10
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -17,25 +17,24 @@ class MedianFinder {
 private:
     priority_queue<int> left;
     priority_queue<int, vector<int>, greater<int>> right;
-    /*
-        left < median <= right
-        - right prioritized over left
-        - 0 <= right.size() - left.size() <= 1
-    */
 
 public:
     MedianFinder() {
     }
 
-    void addNum(int num) {
-        if (right.size() == left.size()) {
-            left.emplace(num);
-            right.emplace(left.top());
-            left.pop();
-        } else {
+    void addNum(int num) { // balance
+        if (right.empty() || num >= right.top()) {
             right.emplace(num);
-            left.emplace(right.top());
-            right.pop();
+            if (right.size() - left.size() > 1) {
+                left.emplace(right.top());
+                right.pop();
+            }
+        } else {
+            left.emplace(num);
+            if (right.size() < left.size()) {
+                right.emplace(left.top());
+                left.pop();
+            }
         }
     }
 

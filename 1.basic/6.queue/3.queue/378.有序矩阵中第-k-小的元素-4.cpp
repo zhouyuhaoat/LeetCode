@@ -14,26 +14,22 @@
 
 // @lc code=start
 class Solution {
-public:
-    int count(vector<vector<int>>& matrix, int val) {
+private:
+    int count(vector<vector<int>>& A, int e) {
         int cnt = 0;
-        for (auto& row : matrix) {
-            /*
-                less or equal to val:
-                - k-th smallest element: the number of elements less than or equal to val is k
-                - upper_bound: count of elements less than or equal to val in a sorted range
-            */
-            cnt += distance(row.begin(), ranges::upper_bound(row, val));
+        for (auto& row : A) {
+            cnt += distance(row.begin(), ranges::upper_bound(row, e)); // less than or equal to val
         }
         return cnt;
     }
 
+public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        int n = matrix.size();
-        int lo = matrix[0][0], hi = matrix[n - 1][n - 1] + 1;
+        int m = matrix.size(), n = matrix[0].size();
+        int lo = matrix[0][0], hi = matrix[m - 1][n - 1] + 1;
         while (lo < hi) {
             int mi = lo + (hi - lo) / 2;
-            if (count(matrix, mi) >= k) {
+            if (count(matrix, mi) >= k) { // count of elements <= mi
                 hi = mi;
             } else {
                 lo = mi + 1;

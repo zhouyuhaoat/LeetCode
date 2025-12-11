@@ -18,8 +18,7 @@ public:
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
         priority_queue<tuple<int, int, int>> pq;
         for (int i = 0; i < min((int)nums1.size(), k); i++) {
-            pq.emplace(-nums1[i] - nums2[0], i, 0);
-            // max heap -> flip by negative -> min heap
+            pq.emplace(-nums1[i] - nums2[0], i, 0); // negative
         }
         vector<vector<int>> res;
         while (k--) {
