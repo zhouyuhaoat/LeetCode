@@ -13,7 +13,6 @@
  */
 
 // @lc code=start
-// Un-Archived
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
