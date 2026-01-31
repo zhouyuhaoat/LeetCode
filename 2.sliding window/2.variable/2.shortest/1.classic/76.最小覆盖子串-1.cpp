@@ -18,12 +18,9 @@ private:
     unordered_map<char, int> win, tar; // have & need
 
     bool isCovered() { // cover: have >= need
-        for (auto [ch, cnt] : tar) {
-            if (win[ch] < cnt) {
-                return false;
-            }
-        }
-        return true;
+        return ranges::all_of(tar, [&](auto it) {
+            return win[it.first] >= it.second; // {ch, cnt}
+        });
     }
 
 public:
