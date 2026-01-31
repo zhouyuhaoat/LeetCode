@@ -1,7 +1,7 @@
 /*
  *   author:    zhouyuhao
  *   created:   2025-05-21 20:50:51
- *   modified:  2026-01-23 13:51:57
+ *   modified:  2026-01-31 16:30:07
  *   project:   LeetCode of labuladong
  *   venue:     914, Harbin
  */
@@ -16,12 +16,9 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        for (auto& row : matrix) {
-            if (ranges::find(row, target) != row.end()) {
-                return true;
-            }
-        }
-        return false;
+        return ranges::any_of(matrix, [&](auto& row) {
+            return ranges::find(row, target) != row.end();
+        });
     }
 };
 // @lc code=end

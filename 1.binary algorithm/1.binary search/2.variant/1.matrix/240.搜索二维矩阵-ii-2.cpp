@@ -16,12 +16,9 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        for (auto& row : matrix) {
-            if (ranges::binary_search(row, target)) {
-                return true;
-            }
-        }
-        return false;
+        return ranges::any_of(matrix, [&](auto& row) {
+            return ranges::binary_search(row, target);
+        });
     }
 };
 // @lc code=end
