@@ -19,7 +19,7 @@ public:
         vector<int> res;
         int mi = ranges::lower_bound(nums, 0) - nums.begin(); // bound -> diverge
         int lo = mi, hi = mi;
-        // [0, lo): negative; [lo, hi): empty; [hi, size): 0 + positive
+        // [0, lo): smaller of negative; [lo, hi): smallest squares; [hi, size): larger of positive
         while (hi - lo < (int)nums.size()) { // 2-way merge
             if (lo == 0) {
                 res.push_back(nums[hi] * nums[hi++]);
