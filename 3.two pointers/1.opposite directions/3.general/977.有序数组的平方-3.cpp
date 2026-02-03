@@ -19,10 +19,10 @@ public:
         vector<int> res(nums.size());
         int lo = 0, hi = nums.size() - 1, idx = hi;
         while (lo <= hi) {
-            if (-nums[lo] > nums[hi]) { // additive inverse
-                res[idx--] = nums[lo] * nums[lo++];
-            } else {
+            if (-nums[lo] < nums[hi]) { // additive inverse
                 res[idx--] = nums[hi] * nums[hi--];
+            } else {
+                res[idx--] = nums[lo] * nums[lo++];
             }
         }
         return res;

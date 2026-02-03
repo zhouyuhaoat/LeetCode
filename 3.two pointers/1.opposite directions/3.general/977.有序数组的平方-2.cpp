@@ -18,14 +18,14 @@ public:
     vector<int> sortedSquares(vector<int>& nums) {
         vector<int> res(nums.size()); // diverge -> reverse merge -> converge
         int lo = 0, hi = nums.size() - 1, idx = hi;
-        while (lo <= hi) {
+        while (hi - lo + 1 > 0) {
             int power1 = nums[lo] * nums[lo], power2 = nums[hi] * nums[hi];
-            if (power1 > power2) {
-                res[idx--] = power1;
-                lo++;
-            } else {
+            if (power1 < power2) {
                 res[idx--] = power2;
                 hi--;
+            } else {
+                res[idx--] = power1;
+                lo++;
             }
         }
         return res;
